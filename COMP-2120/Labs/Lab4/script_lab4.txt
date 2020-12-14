@@ -1,0 +1,364 @@
+Script started on 2020-10-21 18:54:23-04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat Rov[Kbot.java
+
+import java.awt.*;
+
+public class Robot {
+    //instance variables
+    private int direction;
+    private Point location;
+
+    //constructor
+    public Robot(Point location, int direction){
+        this.location=location;
+        if(direction>=0 && direction<=3)//validating direction
+            this.direction=direction;
+    }
+
+    //methods
+    public void turnLeft(){ // supposed to change direction
+        direction--;
+        //wrapping around
+        if(direction<0)
+            direction=3;
+    }
+    public void turnRight(){
+        direction++;
+        //wrapping around
+        if(direction>3)
+            direction=0;
+    }
+    public void move(){
+        switch (direction){
+            case 0:
+                location.y--;//north
+                break;
+            case 1:
+                location.x++;//east
+                break;
+            case 2:
+                location.y++;//south
+                break;
+            case 3:
+                location.x--;//west
+                break;
+        }
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public String getDirection() {
+        switch (direction){
+            case 0:
+                return "N";
+            case 1:
+                return "E";
+            case 2:
+                return "S";
+            default:
+                return "W";
+        }
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat RobotTese[Kter.java
+
+import java.awt.Point;
+/**
+ A class to test the Robot class.
+ */
+public class RobotTester {
+    /**
+     Tests the methods of the Robot class.
+     @param args not used
+     */
+    public static void main(String[] args) {
+        // Create a new Robot object with the initial position of (5,5) and
+        // initial direction to the East (1).
+        Robot robot = new Robot(new Point(5, 5), 1);
+        robot.move(); // 6, 5, 1
+        robot.turnRight(); // 6, 5, 2
+        robot.move(); // 6, 6, 2
+        robot.move(); // 6, 7, 2
+        robot.turnRight(); // 6, 7, 3
+        robot.move(); // 5, 7, 3
+        robot.move(); // 4, 7, 3
+        robot.turnLeft(); // 4, 7, 2
+        robot.move(); // 4, 8, 2
+        Point location = robot.getLocation();
+        System.out.println("Location: " + location.x + ", " + location.y);
+        System.out.println("Expected: 4, 8");
+        System.out.println("Direction: " + robot.getDirection());
+        System.out.println("Expected: S");
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ javac Rov[KbotTester.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ java RobotTester 
+Location: 4, 8
+Expected: 4, 8
+Direction: S
+Expected: S
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat Car.java
+
+public class Car {
+    private String make;
+    private String model;
+    private int year;
+    private int seats;
+    private int maxSpeed;
+    private int wheels;
+    private String type;
+    private String transmission;
+
+    //constructors
+
+    //default constructor
+    public Car(){
+        this.make="";
+        this.model="";
+        this.year=0;
+        this.seats = 0;
+        this.maxSpeed=0;
+        this.wheels=4;
+        this.type="";
+        this.transmission="";
+    }
+    //overload constructor
+    public Car(String make, String model,int year, int seats, int maxSpeed,String type,String transmission){
+        this();
+        this.make=make;
+        this.model=model;
+        this.year=year;
+        this.seats=seats;
+        this.maxSpeed=maxSpeed;
+        this.type=type;
+        this.transmission=transmission;
+    }
+    //setters
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setSeats(int seats) {
+        this.seats = seats;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setWheels(int wheels) {
+        this.wheels = wheels;
+    }
+
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
+    }
+    //getters
+
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getMaxSpeed() {
+        return maxSpeed;
+    }
+    public int getYear() {
+        return year;
+    }
+
+    public int getSeats() {
+        return seats;
+    }
+
+    public int getWheels() {
+        return wheels;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getTransmission() {
+        return transmission;
+    }
+
+    //prints the car information in the getCars() in TestDealer
+    @Override
+    public String toString() {
+        return "Car{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", seats=" + seats +
+                ", maxSpeed=" + maxSpeed +
+                ", wheels=" + wheels +
+                ", type='" + type + '\'' +
+                ", transmission='" + transmission + '\'' +
+                '}';
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat Dealership.java
+
+import java.util.ArrayList;
+
+public class Dealership {
+    private String name;
+    private String location;
+    //Using ArrayList to store managers , employees and Cars
+    //Used ArrayList because it's easy to add or remove
+    ArrayList<String> managers = new ArrayList<>();
+    ArrayList<String> employees = new ArrayList<>();
+    ArrayList<Car> cars = new ArrayList<>();
+
+    // Constructors
+
+    public Dealership(){
+        this.name="";
+        this.location="";
+    }
+    public Dealership(String name, String location) {
+        this.name = name;
+        this.location = location;
+    }
+
+    //setters
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
+    public void setManagers(ArrayList<String> managers)
+    {
+        this.managers = managers;
+    }
+
+    public void setEmployees(ArrayList<String> employees)
+    {
+        this.employees = employees;
+    }
+
+    public void setCars(ArrayList<Car> cars)
+    {
+        this.cars = cars;
+    }
+
+    //getters
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public ArrayList<String> getManagers()
+    {
+        return managers;
+    }
+
+    public ArrayList<String> getEmployees()
+    {
+        return employees;
+    }
+
+    public ArrayList<Car> getCars()
+    {
+        return cars;
+    }
+
+    //adding methods
+    public void addCar(Car c)
+    {
+        this.cars.add(c);
+    }
+
+    public void addEmployee(String employee)
+    {
+        this.employees.add(employee);
+    }
+
+    public void addManager(String manager)
+    {
+        this.managers.add(manager);
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ javac TestDealer.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat TestDealer.
+cat: TestDealer.: No such file or directory
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat TestDealer.java
+
+import java.util.ArrayList;
+
+public class TestDealer {
+    public static void main(String[] args) {
+        Car c1 = new Car("Honda","Civic",2020,5,230,"Sedan","Automatic");
+        Car c2 = new Car();
+        c2.setMake("Honda");
+        c2.setModel("Accord");
+        c2.setMaxSpeed(300);
+        c2.setSeats(5);
+        c2.setYear(2020);
+        c2.setTransmission("Automatic");
+        c2.setType("Sedan");
+
+        Dealership d1 = new Dealership("Honda", "Windsor");
+        //adding managers
+        d1.addManager("Messi");
+        d1.addManager("Virat");
+        //adding employees
+        d1.addEmployee("Jerry");
+        d1.addEmployee("Tom");
+        d1.addEmployee("Rick");
+        d1.addEmployee("Morty");
+        // adding Car to dealership object using addCar() method
+        d1.addCar(c1);
+        d1.addCar(c2);
+
+
+        System.out.println("Dealership Information");
+        System.out.println("Name: "+d1.getName());
+        System.out.println("Location: "+d1.getLocation());
+        System.out.println("Managers: "+d1.getManagers());
+        System.out.println("Employees: "+d1.getEmployees());
+        System.out.println("Cars Available: "+d1.getCars());
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ cat TestDealer.java[Kjavac TestDealer.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ javac TestDealer.java [3Pcat TestDealer.java[Kjavajavac TestDealer.java [3Pcat TestDealer.java[Kjavac TestDealer.java [C[1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [1P [K[1P [1P [1P [1P [1P j a v a [C T e s t D e a l e r 
+Dealership Information
+Name: Honda
+Location: Windsor
+Managers: [Messi, Virat]
+Employees: [Jerry, Tom, Rick, Morty]
+Cars Available: [Car{make='Honda', model='Civic', year=2020, seats=5, maxSpeed=230, wheels=4, type='Sedan', transmission='Automatic'}, Car{make='Honda', model='Accord', year=2020, seats=5, maxSpeed=300, wheels=4, type='Sedan', transmission='Automatic'}]
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 4[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 4[00m$ exit
+exit
+
+Script done on 2020-10-21 18:57:32-04:00 [COMMAND_EXIT_CODE="0"]

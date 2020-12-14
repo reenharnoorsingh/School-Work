@@ -1,0 +1,266 @@
+Script started on 2020-10-06 18:30:28-04:00 [TERM="xterm-256color" TTY="/dev/pts/3" COLUMNS="80" LINES="24"]
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ cat Car.
+Car.class  Car.java   
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ cat Car.java
+public class Car {
+    private String make;
+    private String model;
+    private int year;
+    private double price;
+    private int speed;
+    private int maxSpeed;
+    private boolean isOn;
+    private boolean isMoving;
+
+
+    //Constructors
+    public Car(){ // default constructor
+        this.model="";
+        this.make="";
+        this.year=2020;
+        this.price=0;
+        this.speed = 0;
+        this.maxSpeed = 230;
+        this.isOn = false;
+        this.isMoving = false;
+    }
+    public Car(String make, String model, int year, double price) { //constructor with 4 parameters
+        this();
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.price = price;
+
+
+    }
+
+    public Car(String make, String model, double price) { // constructor with 3 parameters
+        this();
+        this.make = make;
+        this.model = model;
+        this.year = 2020;//current year
+        this.price = price;
+
+    }
+
+    //Accessor and Mutator methods
+    public String getMake() { //returns the make(company)
+        return make;
+    }
+    public void setMake(String make) { //sets the make
+        this.make = make;
+    }
+    public String getModel() { //returns the model
+        return model;
+    }
+
+    public void setModel(String model) { // sets model
+        this.model = model;
+    }
+
+    public int getYear() { //returns the year of the car
+        return year;
+    }
+
+    public void setYear(int year) { //sets the value for year
+        this.year = year;
+    }
+
+    public double getPrice() { //returns the car price
+        return price;
+    }
+
+    public void setPrice(double price) {// sets the car price
+        this.price = price;
+    }
+
+    public int getSpeed() {//returns the current speed
+        return speed;
+    }
+
+    public void setSpeed(int speed) {//sets the starting speed
+        this.speed = speed;
+    }
+
+    public int getMaxSpeed() {//returns maximum speed of the car
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(int maxSpeed) {//sets the maximum speed
+        this.maxSpeed = maxSpeed;
+    }
+
+    public boolean isOn() {//returns a boolean value if the car is on or not
+        return isOn;
+    }
+
+    public boolean isMoving() {//returns a boolean value if the car is moving or not
+        return isMoving;
+    }
+
+    public void turnOn() {// isOn=true
+        this.isOn = true;
+    }
+
+    public void turnOff() {//isOn =false
+        this.isOn = false;
+    }
+
+    public void stop() {//isMoving = false and speed set to 0
+        setSpeed(0);
+        this.isMoving = false;
+    }
+    public void accelerate() {
+        if (isOn) {
+            isMoving = true;
+            if (speed < maxSpeed) {
+                System.out.println("Accelerating.....");
+                speed += 5;//Increasing speed by 5
+            }
+        }
+    }
+    public void decelerate() {
+        if (isOn && isMoving) {
+            if (speed > 0) {
+                System.out.println("Declerating.....");
+                speed -= 5;//Decreasing speed by  5
+            }
+        }
+    }
+
+    // Gas Efficiency part
+    private int gasEfficiency;
+    private int gasLevel;
+
+    public Car(int mileage) {
+        this.gasEfficiency = mileage;
+        this.gasLevel = 0;
+    }
+    public void addGas(int gas) {
+        this.gasLevel += gas;
+    }
+    public void drive(int milesDrive) {
+        while (milesDrive > 0 && gasLevel>0) {
+            System.out.println("Gas level :"+gasLevel);
+            milesDrive -= gasEfficiency;
+            if (gasLevel > 0)
+                this.gasLevel--;
+        }
+    }
+    public int getGasInTank() {
+        return gasLevel;
+    }
+    public int getMilesToGo() {
+        int miles = 0;
+        for (int i = 1; i <= gasLevel; i++) {
+            miles += gasEfficiency;
+        }
+        return miles;
+    }
+
+}
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ java[K[K[K[Kcat ca[K[KCart[KTester.java
+public class CarTester {
+    public static void main(String[] args) {
+        //Part 1
+        Car car = new Car("Suzuki","Breeza",2020,19500);
+        System.out.println("Car Model: "+car.getModel());
+        System.out.println("Car Make: "+car.getMake());
+        System.out.println("Year: "+car.getYear());
+        System.out.println("Price: $"+car.getPrice());
+
+        car.turnOn();
+        for (int i=0;i<20;i++){
+            car.accelerate();
+        }
+        System.out.println("Current Speed after Accelerating :"+ car.getSpeed());
+        for (int i = 0; i<15; i++){
+            car.decelerate();
+        }
+        System.out.println("Current Speed after Decelerating: "+car.getSpeed());
+        System.out.println("Is car moving? "+car.isMoving());
+        car.stop();
+        System.out.println("Current Speed after stop: "+car.getSpeed());
+        car.turnOff();
+
+        //Gas Efficiency Part
+        Car car2 = new Car(20);
+        car2.addGas(20);
+        car2.drive(100);
+        System.out.println("Gas in Tank: "+ car2.getGasInTank());
+        System.out.println("Miles to go with the amount of gas left: "+car2.getMilesToGo());
+    }
+}
+
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ javac CarTester.java 
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ java CarTester 
+Car Model: Breeza
+Car Make: Suzuki
+Year: 2020
+Price: $19500.0
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Accelerating.....
+Current Speed after Accelerating :100
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Declerating.....
+Current Speed after Decelerating: 25
+Is car moving? true
+Current Speed after stop: 0
+Gas level :20
+Gas level :19
+Gas level :18
+Gas level :17
+Gas level :16
+Gas in Tank: 15
+Miles to go with the amount of gas left: 300
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ s[Kcat Activty2.java
+cat: Activty2.java: No such file or directory
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ cat Activty2.javaity2.java[C[C[C[C[C[C[C[C
+public class Activity2 {
+    public static void main(String[] args) {
+        String s = "Hello";
+        System.out.println(s.toUpperCase());
+        String t =s;
+        System.out.println(t);
+    }
+}
+
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ java [Kc Activity2.java 
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ java Activity2 
+HELLO
+Hello
+]0;reen@bravo: ~/Desktop/OOP Java/Lab 3[01;32mreen@bravo[00m:[01;34m~/Desktop/OOP Java/Lab 3[00m$ exit
+exit
+
+Script done on 2020-10-06 18:32:47-04:00 [COMMAND_EXIT_CODE="0"]

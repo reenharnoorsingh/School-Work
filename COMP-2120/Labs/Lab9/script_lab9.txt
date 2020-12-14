@@ -1,0 +1,310 @@
+Script started on 2020-11-27 16:11:39-05:00 [TERM="xterm" TTY="/dev/pts/0" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ ca[K[Kcar[Kt Address.java 
+
+import java.util.*;
+import java.io.*;
+
+
+public class Address {
+    private String address;
+
+    public Address(String address) {
+        this.address = address;
+    }
+
+    public String format() {
+        return "Address: " + address + "\n";
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cat Invoice.java 
+
+import java.util.*;
+import java.io.*;
+
+
+public class Invoice {
+
+    private Address address;
+    private ArrayList<LineItem> lineItem;
+
+    public Invoice(Address add) {
+        address = add;
+        lineItem = new ArrayList<LineItem>();
+    }
+
+    public void add(int quantity, Product prod) {
+        LineItem item = new LineItem(quantity, prod);
+
+        if (!item.outOfStock()) {
+            lineItem.add(item);
+        }
+
+    }
+
+    public double getAmountDue() {
+        double amountDue = 0;
+        for (LineItem item : lineItem) {
+            amountDue += item.getTotalPrice();
+        }
+        return amountDue;
+    }
+
+    public String format() {
+        String s = "INVOICE \n\n" + address.format() + String.format("\n%-20s%8s%5s %8s\n", "Product", "Price", " Quantity", "Total");
+        for (LineItem item : lineItem) {
+            s = s + item.format();
+
+        }
+        s = s + String.format("\nAmount Due: %34.2f", getAmountDue());
+        return s;
+    }
+
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cat LineItem.java 
+
+import java.util.*;
+import java.io.*;
+
+
+public class LineItem {
+
+    private int quantity;
+    private Product prod;
+    private boolean outOfStock;
+
+
+    public LineItem(int quant, Product pro) {
+        prod = pro;
+        quantity = quant;
+
+        if (pro.getAvailability() >= quant && quant > 0) {
+            outOfStock = false;
+        } else {
+            outOfStock = true;
+        }
+
+    }
+
+    public double getTotalPrice() {
+        return prod.getPrice() * quantity;
+    }
+
+
+    public boolean outOfStock() {
+        return outOfStock;
+    }
+
+
+    public String format() {
+        return String.format("\n\n%-20s%8.2f%6d%12.2f\n", prod.getName(), prod.getPrice(), quantity, getTotalPrice());
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cd PR[Krod[1P Proda Prodt Prod[C[C[C[C[Cuct.java 
+
+import java.util.*;
+import java.io.*;
+
+
+public class Product {
+    private String name;
+    private double price;
+    private int availability;
+
+
+    public Product(String name, double price, int a) {
+        this.name = name;
+        this.price = price;
+        this.availability = a;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getAvailability() {
+        return availability;
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cat TesterA1.java 
+
+
+import java.util.*;
+import java.io.*;
+
+
+public class TesterA1 {
+
+    public static void main(String[] args) {
+        Address a1 = new Address("232 Jatt Street");
+        Invoice i1 = new Invoice(a1);
+        Product p1 = new Product("Shampoo", 10.99, 20);
+        Product p2 = new Product("Conditioner", 8.90, 1);
+        Product p3 = new Product("Soap", 2.80, 4);
+        Product p4 = new Product("scrub", 2.00, 20);
+        i1.add(3, p1);
+        i1.add(1, p2);
+        i1.add(4, p3);
+        i1.add(0, p4);
+        System.out.println(i1.format());
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ javac Testye[K[K[KterA1.java
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ java TesterA1 
+INVOICE 
+
+Address: 232 Jatt Street
+
+Product                Price Quantity    Total
+
+
+Shampoo                10.99     3       32.97
+
+
+Conditioner             8.90     1        8.90
+
+
+Soap                    2.80     4       11.20
+
+Amount Due:                              53.07
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cat Pait[Kr.java 
+
+public class Pair<T, S> {
+    private T first;
+    private S second;
+
+    // constructors
+    public Pair() {
+    }
+
+    public Pair(T first, S second) {
+        setFirst(first);
+        setSecond(second);
+    }
+
+    // getter and setter methods
+    public T getFirst() {
+        return first;
+    }
+
+    public void setFirst(T first) {
+        this.first = first;
+    }
+
+    public S getSecond() {
+        return second;
+    }
+
+    public void setSecond(S second) {
+        this.second = second;
+    }
+
+    // override toString() method
+    public String toString() {
+        String s = this.first.toString() + " => " + this.second.toString();
+        return s;
+    }
+
+    // override equals() method
+    public boolean equals(Pair p) {
+        if (this == p) {
+            return true;
+        } else return this.first.equals(p.first) && this.second.equals(p.second);
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ cat TestPair.java 
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class TestPair {
+    public static void main(String[] args) {
+
+        //testing the pairs class methods with simple pair objects
+        Pair<String,String> onePair = new Pair<String,String>();
+        Pair<String,String> anotherPair = new Pair<String,String>();
+        onePair.setFirst("I am first");
+        onePair.setSecond("I am second");
+        anotherPair.setFirst("Hello!");
+        anotherPair.setSecond("Hi!");
+
+        System.out.println(onePair);
+        System.out.println(anotherPair);
+        System.out.println("Both Pairs are equal: "+onePair.equals(anotherPair)+"\n\n");
+
+        //  create a ArrayList of Pair objects with one element string and another element as arrayList of string
+        ArrayList<Pair<String, ArrayList<String>>> my_pairs = new ArrayList<Pair<String,ArrayList<String>>>();
+ 
+        //Now we will add some elements in the above arrayList as we need to save a word and its synonyms.
+
+        String beautiful = "beautiful";
+        ArrayList<String> beautiful_synonyms = new ArrayList<String>();
+        beautiful_synonyms.add("attractive");
+        beautiful_synonyms.add("pretty");
+        beautiful_synonyms.add("lovely");
+        Collections.sort(beautiful_synonyms);
+        //create pair object for these words
+        Pair<String,ArrayList<String>> p1 = new Pair<String,ArrayList<String>>();
+        p1.setFirst(beautiful);
+        p1.setSecond(beautiful_synonyms);
+
+        String happy = "happy";
+        ArrayList<String> happy_synonyms = new ArrayList<String>();
+        happy_synonyms.add("joyful");
+        happy_synonyms.add("upbeat");
+        happy_synonyms.add("content");
+        Collections.sort(happy_synonyms);
+        //create pair object for these words
+        Pair<String,ArrayList<String>> p2 = new Pair<String,ArrayList<String>>();
+        p2.setFirst(happy);
+        p2.setSecond(happy_synonyms);
+
+        String funny = "funny";
+        ArrayList<String> funny_synonyms = new ArrayList<String>();
+        funny_synonyms.add("humorous");
+        funny_synonyms.add("comical");
+        Collections.sort(funny_synonyms);
+        //create pair object for these words
+        Pair<String,ArrayList<String>> p3 = new Pair<String,ArrayList<String>>();
+        p3.setFirst(funny);
+        p3.setSecond(funny_synonyms);
+
+        //  now we will add the above three pair objects into arrayList of pair obejcts
+        my_pairs.add(p1);
+        my_pairs.add(p2);
+        my_pairs.add(p3);
+
+        //lets print this arrayList
+        System.out.println("Arraylist of Pairs:\n" + my_pairs);
+
+        // now we need to sort the content alpabatically according to first value of pair objects
+        my_pairs.sort((o1, o2) -> o1.getFirst().compareTo(o2.getFirst()));
+
+        //  now we will print the sorted arraylist
+        System.out.println("\nSorted Arraylist of Pairs:\n" + my_pairs);
+
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ gcc[K[K[Kjavac TestPair.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ java TestPair 
+I am first => I am second
+Hello! => Hi!
+Both Pairs are equal: false
+
+
+Arraylist of Pairs:
+[beautiful => [attractive, lovely, pretty], happy => [content, joyful, upbeat], funny => [comical, humorous]]
+
+Sorted Arraylist of Pairs:
+[beautiful => [attractive, lovely, pretty], funny => [comical, humorous], happy => [content, joyful, upbeat]]
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 9[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 9[00m$ exit
+exit
+
+Script done on 2020-11-27 16:14:58-05:00 [COMMAND_EXIT_CODE="0"]

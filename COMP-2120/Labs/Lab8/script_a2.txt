@@ -1,0 +1,179 @@
+Script started on 2020-11-19 15:26:01-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat Aticity[K[K[K[K[K[Kctivity2.txt
+cat: Activity2.txt: No such file or directory
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat Activity2.txt[K[K[K[K.java
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+class Activity2 {
+        public String inputFileName, outputFileName, type, data;// To store the input file, output file name, type of
+        // data in that file, and the oder of sorting
+        public char order;
+
+        public static void main(String[] args) throws Exception {
+                Activity2 a2 = new Activity2();
+
+                a2.inputFileName = args[0];
+                a2.outputFileName = args[1];
+                a2.order = args[2].charAt(0);
+
+                a2.readFromFile();
+                a2.sorting();
+        }
+
+        public void readFromFile()// method to read data from file
+        {
+                String line;
+                data = "";
+                try (BufferedReader br = new BufferedReader(
+                                new InputStreamReader(new FileInputStream(inputFileName)))) {
+                        while ((line = br.readLine()) != null)// reading till end of file
+                        {
+                                data += line + "\n";// storing the data of file in "data"
+                        }
+                } catch (Exception e) {
+                        System.out.println("Exception!!!!\n" + e);
+                }
+        }
+
+        public void sorting() throws Exception {
+                String[] values = data.split("\\n");// creating a string array from the values read from the file.
+                PrintWriter writer = new PrintWriter(outputFileName);// for writing to the file
+                if (data.startsWith("Integer"))// for integer data type
+                {
+                        ArrayList<Integer> list1 = new ArrayList<Integer>();// creating an ArrayList
+                        for (int i = 0; i < values.length; i++) {
+                                try {
+                                        list1.add(Integer.parseInt(values[i])); // converting the strings to integer and
+                                        // adding them in the ArrayList
+                                } catch (Exception e) {
+                                }
+                        }
+                        if (order == 'a')// sorting in ascending order
+                                Collections.sort(list1);
+                        else// sorting in descending order
+                                Collections.sort(list1, Collections.reverseOrder());
+
+                        writer.println("Integer, " + list1.size());
+
+                        for (Integer a : list1) {
+                                writer.println(a);
+                        }
+
+                } else if (data.startsWith("Float"))// for float data type
+                {
+                        ArrayList<Float> list1 = new ArrayList<Float>();
+                        for (int i = 1; i < values.length; i++) {
+                                try {
+                                        list1.add(Float.parseFloat(values[i]));
+                                } catch (Exception e) {
+                                }
+                        }
+                        if (order == 'a')
+                                Collections.sort(list1);
+                        else
+                                Collections.sort(list1, Collections.reverseOrder());
+
+                        writer.println("Float, " + list1.size());
+
+                        for (Float a : list1) {
+                                writer.println(a);
+                        }
+                } else if (data.startsWith("Double"))// for double data type
+                {
+                        ArrayList<Double> list1 = new ArrayList<Double>();
+                        for (int i = 1; i < values.length; i++) {
+                                try {
+                                        list1.add(Double.parseDouble(values[i]));
+                                } catch (Exception e) {
+                                }
+                        }
+                        if (order == 'a')
+                                Collections.sort(list1);
+                        else
+                                Collections.sort(list1, Collections.reverseOrder());
+
+                        writer.println("Double, " + list1.size());
+
+                        for (Double a : list1) {
+                                writer.println(a);
+                        }
+                } else// for everything else
+                {
+                        ArrayList<String> list1 = new ArrayList<String>();
+                        for (int i = 1; i < values.length; i++) {
+                                list1.add(values[i]);
+                        }
+
+                        if (order == 'a')
+                                Collections.sort(list1);
+                        else
+                                Collections.sort(list1, Collections.reverseOrder());
+
+                        writer.println(values[0] + ", " + list1.size());
+
+                        for (String a : list1) {
+                                writer.println(a);
+                        }
+
+                }
+
+                writer.close();
+
+        }
+
+}]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ javc[Kac ac[K[KActivity2.jva[K[Kava
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ javac Activity2.java[2Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Ptxtexit[Kjava Activity2 input2.txt o2.txt adcat o1.txt[Kjava Activity2 input1.txt o1.txt a
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat 01[K[Ko1.txt
+String, 4
+Bye
+Hello!
+Hey!
+Welcome
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o1.txtjava Activity2 input1.txt o1.txt a[14Pc Activity2.java[2Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Ptxtexit[Kjava Activity2 input2.txt o2.txt a[Kd
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o2.txt
+Integer, 7
+239
+83
+12
+12
+0
+-5
+-36
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ c[Kcat o2.txtjava Activity2 input2.txt o2.txt d[C[1@a[C[C[C[C[C[C[Ka
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ java Activity2 input2.txt o2a.txt acat o2.txt[Ka.txt[C[C[C[C
+Integer, 7
+-36
+-5
+0
+12
+12
+83
+239
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o2a.txt[Kcat o2a.txtjava Activity2 input2.txt o2a.txt a[C[1P[1@3[C[C[C[C[C[C[C[1P[C[1P[1@3[1@a[C[C[C[C[C[C
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o3a.txt 
+Double, 6
+-94.0
+-12.4
+2.9
+3.0
+22.0
+92.45
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o3a.txt [Kcat o3a.txt java Activity2 input3.txt o3a.txt a[1P[1@d[C[C[C[C[C[C[Kd
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat o3d.txt 
+Double, 6
+92.45
+22.0
+3.0
+2.9
+-12.4
+-94.0
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ eix[K[Kxit
+exit
+
+Script done on 2020-11-19 15:29:19-05:00 [COMMAND_EXIT_CODE="0"]

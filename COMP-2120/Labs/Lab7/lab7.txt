@@ -1,0 +1,385 @@
+Script started on 2020-11-13 12:57:20-05:00 [TERM="xterm" TTY="/dev/pts/4" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Payable.java 
+
+interface Payable {
+    public double getPaymentAmount();
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Employee.java
+
+class Employee implements Payable {
+    int empCode = 123;
+    String empName = "Tammy";
+    double hourlyRate = 52;
+    int workingHours = 8;
+    double payment;
+
+    public double getPaymentAmount() {
+        int taxAmt = 13;
+        payment = workingHours * hourlyRate;
+        return payment;
+    }
+
+    public void show() {
+        System.out.println("Employee code:" + empCode);
+        System.out.println("Employee Name:" + empName);
+        System.out.println("Working Hour:" + workingHours);
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Invoice.java 
+
+class Invoice implements Payable {
+
+    String product_name = "Hair oil";
+    int quantity = 2;
+    double price = 200;
+    int tax_in_per = 20;
+    double payment;
+
+    public double getPaymentAmount() {
+        payment = (price * quantity) + (tax_in_per);
+        return payment;
+    }
+
+    public void show() {
+        System.out.println("Product name:" + product_name);
+        System.out.println("Price:" + price);
+        System.out.println("Quantity:" + quantity);
+        System.out.println("Tax:" + tax_in_per + "%");
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Tester_q1.java 
+
+class Tester_q1 {
+    public static void main(String[] args) {
+        Invoice in = new Invoice();
+        in.show();
+        System.out.println("Payemnt is " + in.getPaymentAmount());
+
+        System.out.println(" ");
+        Employee e = new Employee();
+        e.show();
+        System.out.println("Payemnt is " + e.getPaymentAmount());
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ javac Tester_q1.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ java Tester_q1 
+Product name:Hair oil
+Price:200.0
+Quantity:2
+Tax:20%
+Payemnt is 420.0
+ 
+Employee code:123
+Employee Name:Tammy
+Working Hour:8
+Payemnt is 416.0
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Shape.java
+
+public abstract class Shape implements Comparable<Shape> {
+
+    private String name;
+
+    public Shape() {
+        this.name = "General Shape";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public abstract double area();
+
+    @Override
+    public int compareTo(Shape o) {
+        if (this.area() < o.area())
+            return -1;
+        if (this.area() > o.area())
+            return 1;
+        return 0;
+
+    }
+
+}
+
+
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Ediblie[K[K[K[Kble.java 
+
+interface Edible {
+    public String howToEat();
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Animal.java 
+
+abstract class Animal {
+        
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat chic[K[K[K[KChicken.java 
+
+class Chicken extends Animal implements Edible {
+    @Override
+    public String howToEat() {
+        return "Chicken: Fry it and enjoy eating with ketchup, fries and Coke.";
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Meat.java 
+
+class Meat extends Animal implements Edible {
+    @Override
+    public String howToEat() {
+        return "Meat: Add masala, cook and eat hot.";
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cta[K[Kat Fish.java 
+class Fish extends Animal implements Edible {
+    @Override
+    public String howToEat() {
+        return "Fish: Fry and eat.";
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Fruit.java 
+abstract class Fruit {
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Orange.java 
+
+class Orange extends Fruit implements Edible {
+    @Override
+    public String howToEat() {
+        return "Orange: Making juice and drinking will be tasty.";
+    }
+}
+
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Apple.java 
+
+class Apple extends Fruit implements Edible {
+    @Override
+    public String howToEat() {
+        return "Apple: Try eating one apple per day";
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Banana.java 
+
+class Banana extends Fruit implements Edible {
+    @Override
+    public String howToEat() {
+        return "Banana: Cut it into pieces and eat as fruit salad.";
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Tester_q3.java 
+
+public class Tester_q3 {
+    public static void main(String[] args) {
+        String message;
+
+        //declare as many objects as needed and call the howToEat() method
+        //print the message.
+        Chicken c = new Chicken();
+        message = c.howToEat();
+        System.out.println(message);
+
+        Apple a = new Apple();
+        message = a.howToEat();
+        System.out.println(message);
+    }
+}  
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ javax[Kc Tester_q3.java 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ java Tester_q3 
+Chicken: Fry it and enjoy eating with ketchup, fries and Coke.
+Apple: Try eating one apple per day
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ ctaa[K[K[Kat Shape.java 
+
+public abstract class Shape implements Comparable<Shape> {
+
+    private String name;
+
+    public Shape() {
+        this.name = "General Shape";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public abstract double area();
+
+    @Override
+    public int compareTo(Shape o) {
+        if (this.area() < o.area())
+            return -1;
+        if (this.area() > o.area())
+            return 1;
+        return 0;
+
+    }
+
+}
+
+
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Circle.java 
+
+public class Circle extends Shape {
+
+    private double radius;
+
+    public Circle(double radius) {
+        this.setName("Circle");
+        this.radius = radius;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * this.radius * this.radius;
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Oval.java 
+
+public class Oval extends Shape {
+    private double hRadius; // Declare the instance variables
+    private double vradius;
+
+    /**
+     * @param hRadius
+     * @param vradius
+     */
+    public Oval(double hRadius, double vradius) {
+        this.setName("Oval");
+        this.hRadius = hRadius;
+        this.vradius = vradius;
+    }
+
+    /**
+     * @return the hRadius
+     */
+    public double gethRadius() {
+        return hRadius;
+    }
+
+    /**
+     * @param hRadius the hRadius to set
+     */
+    public void sethRadius(double hRadius) {
+        this.hRadius = hRadius;
+    }
+
+    /**
+     * @return the vradius
+     */
+    public double getVradius() {
+        return vradius;
+    }
+
+    /**
+     * @param vradius the vradius to set
+     */
+    public void setVradius(double vradius) {
+        this.vradius = vradius;
+    }
+
+    @Override
+    public double area() {
+        return (Math.PI * (hRadius * vradius)) / 4;
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Triangle.java 
+
+public class Triangle extends Shape {
+
+    private double base;
+    private double height;
+
+    public Triangle(double base, double height) {
+        this.setName("Triangle");
+        this.base = base;
+        this.height = height;
+    }
+
+    public double getBase() {
+        return base;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public double area() {
+        return (this.base * this.height) / 2;
+    }
+
+}
+
+
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Square.java 
+
+public class Square extends Shape {
+
+    private double side;
+
+    public Square(double side) {
+        this.setName("Square");
+        this.side = side;
+    }
+
+    public double getSide() {
+        return side;
+    }
+
+    @Override
+    public double area() {
+        return this.side * this.side;
+    }
+
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ cat Tester_q4.java 
+
+public class Tester_q4 {
+    public static void main(String[] args) {
+        //creating the shapes
+        Circle c = new Circle(2.0);
+        Oval o = new Oval(2.0, 2.0);
+        Square s = new Square(4.0);
+        Triangle t = new Triangle(2.0, 2.0);
+        //printing the areas of all shapes for reference
+        System.out.println("Area of Circle: " + String.valueOf(c.area()));
+        System.out.println("Area of Oval: " + String.valueOf(o.area()));
+        System.out.println("Area of Square: " + String.valueOf(s.area()));
+        System.out.println("Area of Triangle: " + String.valueOf(t.area()));
+
+        //testing code
+        //assertion will be thrown when any values are not matched
+        assert c.compareTo(o) == 1 : "Incorrect comparision! Circle is larger than oval!";
+        assert o.compareTo(c) == -1 : "Incorrect comparision! Circle is larger than oval!";
+        assert c.compareTo(c) == 0 : "Incorrect comparision! Circles are equal in area!";
+        assert o.compareTo(s) == -1 : "Incorrect comparision! Square is larger than oval!";
+        assert c.compareTo(s) == -1 : "Incorrect comparision! Square is larger than circle!";
+        assert s.compareTo(t) == 1 : "Incorrect comparision! Square is larger than triangle!";
+        assert o.compareTo(t) == 1 : "Incorrect comparision! oval is larger than Triangle!";
+        System.out.println("All Assertions Complete!");
+    }
+}
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ javac Tester_q4.c[Kjava 
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ jva[K[Kava Tester_q4
+Area of Circle: 12.566370614359172
+Area of Oval: 3.141592653589793
+Area of Square: 16.0
+Area of Triangle: 2.0
+All Assertions Complete!
+]0;reen@alpha: ~/Desktop/OOP Java/Lab 7[01;32mreen@alpha[00m:[01;34m~/Desktop/OOP Java/Lab 7[00m$ exit
+exit
+
+Script done on 2020-11-13 13:06:44-05:00 [COMMAND_EXIT_CODE="0"]

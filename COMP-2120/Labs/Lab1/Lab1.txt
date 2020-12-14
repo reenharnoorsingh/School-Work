@@ -1,0 +1,68 @@
+Script started on 2020-09-22 18:32:19-04:00 [TERM="xterm-256color" TTY="/dev/pts/10" COLUMNS="80" LINES="24"]
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ cat DialogViewer_Activity_1.java
+/*
+* Name : Harnoor Singh Reen
+* Student Number: 110006294
+*/
+import javax.swing.JOptionPane;
+public class DialogViewer_Activity_1 {
+    public static void main(String[] args) {
+        String name = JOptionPane.showInputDialog("What is your name");
+        System.out.println("Hello "+name+"!");
+    }
+}
+//https://docs.oracle.com/en/java/javase/13/docs/api/java.desktop/javax/swing/JOptionPane.html
+//hyperlink for javax.swing.JOptionPane;
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ cat [K[K[K[Kjavac DialogViewer_Activity_1.java 
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ java DialogViewer_Activity_1 
+Hello Harnoor!
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ cat Lab1_Activity_2.java
+/*
+* Name: Harnoor Singh Reen
+* Student Number : 110006294
+*/
+public class Lab1_Activity_2 {
+    public static void main(String[] args) {
+        int i=1;//taking i=1
+        String name1= new String("Vaishnavi");
+        String name2 = new String("Jashwant");
+        String name3 = new String("Sajen");
+        System.out.println(i+"\t"+name1);
+        i++;
+        System.out.println(i+"\t"+name2);
+        i++;
+        System.out.println(i+"\t"+name3);
+    }
+}
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ javac LA[Kab1_Activity_2.java
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ java lab[K[K[KLab1_Activity_b[K2
+1	Vaishnavi
+2	Jashwant
+3	Sajen
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ cat Lab1_Activity_3.java
+/*
+* Name : Harnoor Singh Reen
+* Student Number: 110006294
+*/
+
+//Here are some methods I found as mentioned in the Activity 3
+
+import java.awt.Rectangle;
+
+public class Lab1_Activity_3 {
+    public static void main(String[] args) {
+        Rectangle r = new Rectangle(34,35,55,77);
+        // translate(int dx, int dy) : Translates this Rectangle the indicated distance,
+        // to the right along the X coordinate axis, and downward along the Y coordinate axis.
+
+        //setRect(double x, double y, double width, double height) : Sets the bounds of this
+        // Rectangle to the integer bounds which encompass the specified x, y, width, and height
+
+
+    }
+}
+
+]0;reen@charlie: ~/Desktop/OOP Java/Lab1[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab1[00m$ exit
+exit
+
+Script done on 2020-09-22 18:37:32-04:00 [COMMAND_EXIT_CODE="0"]

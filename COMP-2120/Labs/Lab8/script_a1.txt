@@ -1,0 +1,32 @@
+Script started on 2020-11-19 14:53:19-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat Activity1.java
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
+public class Activity1 {
+    public static void main(String[] args) {
+        try {
+            PrintWriter fw = new PrintWriter("hello.txt");
+            fw.println("Hello World!");
+            fw.close();
+
+            File fr = new File("hello.txt");
+            Scanner sc = new Scanner(fr);
+            while (sc.hasNext())
+                System.out.printf(sc.next() + " ");
+        } catch (FileNotFoundException e) {
+            System.out.println("Invalid file");
+        }
+    }
+}
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ p[Kjavac Aj[Kctivity1.java
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ jva[K[Kava Av[Kctivity1
+Hello World! ]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ 
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ cat g[Khello.txtx[K
+Hello World!
+]0;reen@charlie: ~/Desktop/OOP Java/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/OOP Java/Lab 8[00m$ exit
+exit
+
+Script done on 2020-11-19 14:55:13-05:00 [COMMAND_EXIT_CODE="0"]

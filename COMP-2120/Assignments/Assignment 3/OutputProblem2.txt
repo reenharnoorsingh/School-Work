@@ -1,0 +1,16 @@
+Number of rows: 214
+Expected: 214
+Number of fields in row 10: 7
+Expected: 7
+Row 10, Col 2: 24.95
+Expected: 24.95
+Number of rows: 2
+Expected: 2
+Number of fields in row 1: 4
+Expected: 4
+Row 1, Col 2:  "Hello, World"
+Expected: Hello, World
+Row 1, Col 3:  "He asked: ""Quo vadis?"""
+Expected: He asked: "Quo vadis?"
+Row 0, Col 3:  """..., that all men are created equal, ..."""
+Expected: "..., that all men are created equal, ..."
