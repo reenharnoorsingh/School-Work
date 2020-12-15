@@ -1,0 +1,21 @@
+https://drive.google.com/file/d/1i2heT8SOcFtidQ4qSGra7FnxsVucW_wT/view?usp=sharing
+
+Name : Harnoor Singh Reen
+Lab Section 51
+Student ID: 110006294
+
+The link for the video. I have made diagrams for better understanding of how the program works
+but if my voice is not clear or if you dont understand my reasoning in the video for some reason
+here is what I want to say!
+
+What happens after removing else exit(11);   :
+    Answer: Instead of exiting the parent process just continues and 
+    so the loop runs again and that’s why it prints child process again.
+    The if part executed and a child process is made 
+    But when we remove the else part , 
+    Even if the cpid isn’t 0 and the child is not created, 
+    it doesn’t exit and it makes a child process
+
+
+Thanks
+Harnoor

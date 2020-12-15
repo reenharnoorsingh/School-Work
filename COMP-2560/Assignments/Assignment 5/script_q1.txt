@@ -1,0 +1,71 @@
+Script started on 2020-12-01 10:09:34-05:00 [TERM="xterm" TTY="/dev/pts/2" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ cat Assign_q1.c
+/*
+Name: Harnoor Singh Reen
+Student ID: 110006294
+*/
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+// Function prints messages
+void sigalrm()
+{
+    printf("Ding!\n");
+    printf("done\n");
+    exit(0);
+}
+
+int main(int argc, char *argv[])
+{
+    // Check if sleep time is passed as argument or not.
+    if (argc != 2)
+    {
+        printf("Arguement for seconds missing\n");
+        exit(1);
+    }
+
+    int sleepTime = atoi(argv[1]); //converts string arguement to an integer type
+
+    printf("alarm application starting\n");
+
+    // Forking a new process. For returns 0 when it is a child process and it
+    // return child process id incase of parent.
+    if (fork() == 0)
+    {
+        printf("waiting for alarm to go off\n");
+        printf("<%d second pause>\n", sleepTime);
+        // Sleeping for requested time
+        sleep(sleepTime);
+        kill(getppid(), SIGALRM); //sends signal to parent process
+    }
+    else
+    {
+        //parent process
+        signal(SIGALRM, sigalrm);
+        // Do an infinite wait here to wait for the signal
+        while (1)
+        {
+        }
+    }
+}
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ gcc -[KAssign_q1.c -o q1
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q1 [K
+Arguement for seconds missing
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q1 5
+alarm application starting
+waiting for alarm to go off
+<5 second pause>
+Ding!
+done
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q1 10
+alarm application starting
+waiting for alarm to go off
+<10 second pause>
+Ding!
+done
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ exit
+exit
+
+Script done on 2020-12-01 10:11:04-05:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,77 @@
+Script started on 2020-11-22 14:46:46-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 3[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 3[00m$ cat Assignment4_q3.c 
+/*
+Name : Harnoor Singh Reen
+Student id: 110006294
+*/
+
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+int main(int argc, char const *argv[])
+{
+    int n = argc - 1;
+    if (n % 2 != 0)
+        n += 1;
+    //if no command is provided the display error message
+    if (argc <= 1)
+        printf("\nInvalid number of arguements\n");
+    //if there is only command then we need to execute it
+    if (n == 1)
+    {
+        if (fork() == 0)
+        {
+            //this line will print the child process id and parent process ids
+            printf("[child] pid %d from [parent] pid %d\n", getpid(), getppid());
+            execlp(argv[1], argv[1], NULL, (char *)NULL);
+            printf("\n");
+            exit(0);
+        }
+        wait(NULL);
+    }
+    //if there are more commands or commands with options the this block of will be executed
+    else
+    {
+        for (int i = 1; i < n; i++)
+        {
+            if (fork() == 0)
+            {
+                //this line will print the child process id and parent process ids
+                printf("[child] pid %d from [parent] pid %d\n", getpid(), getppid());
+                if (i != n)
+                {
+                    execlp(argv[i], argv[i], argv[i + 1], (char *)NULL);
+                    printf("\n");
+                }
+                else
+                {
+                    execlp(argv[i], argv[i], NULL, (char *)NULL);
+                    printf("\n");
+                }
+                exit(0);
+            }
+            i++;
+        }
+        for (int i = 0; i < n; i++)
+            wait(NULL);
+    }
+}
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 3[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 3[00m$ gcc Assignment4_q3.c -o q3
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 3[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 3[00m$ .[Knano heloo[K[Klo.txt
+[?1049h[22;0;0t[1;43r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[41;81H(B[0;7m[ New File ](B[m[H(B[0;7m  GNU nano 3.2                                                                     hello.txt                                                                                [1;171H(B[m[42d(B[0;7m^G(B[m Get Help[18G(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut Text[69G(B[0;7m^J(B[m Justify[86G(B[0;7m^C(B[m Cur Pos[103G(B[0;7mM-U(B[m Undo[42;120H(B[0;7mM-A(B[m Mark Text    (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous[43d(B[0;7m^X(B[m Exit[43;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Uncut Text    (B[0;7m^T(B[m To Spell[86G(B[0;7m^_(B[m Go To Line    (B[0;7mM-E(B[m Redo[43;120H(B[0;7mM-6(B[m Copy Text    (B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[41d[3d[39;49m(B[m[?12l[?25h[?25l[1;163H(B[0;7mModified(B[m[3dH[?12l[?25h[?25li[?12l[?25h[?25l[4d[?12l[?25h[?25lH[?12l[?25h[?25le[?12l[?25h[?25ll[?12l[?25h[?25ll[?12l[?25h[?25lo[?12l[?25h[?25l [?12l[?25h[?25lW[?12l[?25h[?25lo[?12l[?25h[?25lr[?12l[?25h[?25ll[?12l[?25h[?25ld[?12l[?25h[?25l[5d[?12l[?25h[?25l[1;171H[1;163H(B[0;7m        (B[m[41;78H(B[0;7m[ Wrote 3 lines ](B[m[5d[?12l[?25h[?25l[41d[J[43;172H[?12l[?25h[43;1H[?1049l[23;0;0t[?1l>]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 3[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 3[00m$ ./q3 cat hello.txt ls -t ps
+[child] pid 26715 from [parent] pid 26714
+[child] pid 26717 from [parent] pid 26714
+[child] pid 26718 from [parent] pid 26714
+Hi
+Hello World
+
+hello.txt  q3  time_q3.txt  script_q3.txt  Assignment4_q3.c
+  PID TTY          TIME CMD
+26025 pts/6    00:00:00 bash
+26714 pts/6    00:00:00 q3
+26718 pts/6    00:00:00 ps
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 3[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 3[00m$ exit
+exit
+
+Script done on 2020-11-22 14:49:08-05:00 [COMMAND_EXIT_CODE="0"]

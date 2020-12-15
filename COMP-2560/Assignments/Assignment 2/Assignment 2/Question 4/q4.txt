@@ -1,0 +1,76 @@
+Script started on 2020-10-25 19:58:34-04:00 [TERM="xterm" TTY="/dev/pts/12" COLUMNS="172" LINES="43"]
+ls
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ ls
+[0m[01;32ma.out[0m  filesize3.c  hello.txt  q4.txt  time_q4.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ file[K[K[K[Kgcc filesize3.txt[K[K[Kc -o filesix[Kze3.[K
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ cat hello
+cat: hello: No such file or directory
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ cat hello.txt
+hello my name is Borat
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ ls -l heloo[K[Klo.txt
+-rw-r--r-- 1 reen temp 23 Oct 25 19:51 hello.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ l[K./filesize3 hello.txt
+fileSize=0
+fileSize=1
+fileSize=2
+fileSize=3
+fileSize=4
+fileSize=5
+fileSize=6
+fileSize=7
+fileSize=8
+fileSize=9
+fileSize=10
+fileSize=11
+fileSize=12
+fileSize=13
+fileSize=14
+fileSize=15
+fileSize=16
+fileSize=17
+fileSize=18
+fileSize=19
+fileSize=20
+fileSize=21
+fileSize=22
+fileSize=23
+Size of hello.txt is 23
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ cat filesize3.c
+#include <stdio.h>
+
+int main(int argc, char *argv[]){  
+	FILE *fd;
+	
+	int ch;
+
+	int fileSize=-1;
+
+	fd = fopen(argv[1], "r+b");     
+	/*
+	do{
+		ch=getc(fd);  //printf("ch=%c ", ch);
+		fileSize++;
+		printf("fileSize=%d\n", fileSize);
+	} while( ch != EOF);
+	*/ 
+	while( ch != EOF)
+	{
+		ch=getc(fd);  //printf("ch=%c ", ch);
+		fileSize++;
+		printf("fileSize=%d\n", fileSize);
+	} 
+	
+	printf("Size of %s is %d\n", argv[1], fileSize);
+}
+/*
+I think the potential problem here is the do while loop Since it checks the condition
+after the program is run whereas when using EOF we would ideally want the condition
+to be checked after we push the character 
+
+So,
+Instead of do-while I will use the while loop in this case
+*/
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 4[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 4[00m$ exit
+exit
+
+Script done on 2020-10-25 20:02:08-04:00 [COMMAND_EXIT_CODE="0"]

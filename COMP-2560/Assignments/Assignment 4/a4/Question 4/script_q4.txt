@@ -1,0 +1,249 @@
+Script started on 2020-11-22 16:45:30-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 4[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 4[00m$ ls[K[Kcat userin.c
+/*
+Name : Harnoor Singh 
+Student id: 110006294
+*/
+#include "smallsh.h"
+
+static char inpbuf[MAXBUF], //removed tokbuf
+	*ptr = inpbuf;
+
+int inarg(char c);
+
+int userin(char *p)
+{
+	int c, count;
+	ptr = inpbuf;
+
+	printf("%s", p);
+	count = 0;
+	while (1)
+	{
+		if ((c = getchar()) == EOF)
+			return (EOF);
+		if (count < MAXBUF)
+			inpbuf[count++] = c;
+		if (c == '\n' && count < MAXBUF)
+		{
+			inpbuf[count] = '\0';
+			return count;
+		}
+
+		if (c == '\n')
+		{
+			printf("smallsh: input line too long\n");
+			count = 0;
+			printf("%s ", p);
+		}
+	}
+}
+
+int gettok(char **outptr)
+{
+	int type;
+	*outptr = ptr; //points to inpbuf
+	while (*ptr == ' ' || *ptr == '\t')
+		ptr++;
+	switch (*ptr++)
+	{
+	case '\n':
+		type = EOL;
+		break;
+	case '&':
+		type = AMPERSAND;
+		break;
+	case ';':
+		type = SEMICOLON;
+		break;
+	default:
+		type = ARG;
+
+		while (inarg(*ptr))
+			*ptr++;
+	}
+	//find the end of the line and replace that by '\0'
+	if (*ptr == '\n')
+	{
+		*ptr++ = '\0';
+		*ptr = '\n';
+	}
+	else
+	{
+		*ptr++ = '\0';
+	}
+
+	return type;
+}
+
+//****************************************************************************************
+static char special[] = {' ', '\t', '&', ';', '\n', '\0'};
+int inarg(char c)
+{
+	char *wrk;
+	for (wrk = special; *wrk; wrk++)
+	{
+		if (c == *wrk)
+			return (0);
+	}
+	return (1);
+}
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 4[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 4[00m$ gcc -g usi[Kerin.c runcommnad[K[K[Kand.c proc_line.c main_smallsh.c -o smallsh
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 4[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 4[00m$ ./s[Ksmallsh
+Command> ls\
+ls\: No such file or directory
+Command> ls
+main_smallsh.c	proc_line.c  runcommand.c  script_q4.txt  smallsh  smallsh.h  timeq4.txt  userin.c
+Command> cat
+
+
+main_smaill   llsh.c
+main_smallsh.c
+hello
+hello
+^C
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 4[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 4[00m$ ./smallsh
+Command> ls 
+main_smallsh.c	proc_line.c  runcommand.c  script_q4.txt  smallsh  smallsh.h  timeq4.txt  userin.c
+Command> ps
+  PID TTY          TIME CMD
+25444 pts/16   00:00:00 bash
+28233 pts/16   00:00:00 smallsh
+28312 pts/16   00:00:00 ps
+Command> cas t userin.c
+/*
+Name : Harnoor Singh 
+Student id: 110006294
+*/
+#include "smallsh.h"
+
+static char inpbuf[MAXBUF], //removed tokbuf
+	*ptr = inpbuf;
+
+int inarg(char c);
+
+int userin(char *p)
+{
+	int c, count;
+	ptr = inpbuf;
+
+	printf("%s", p);
+	count = 0;
+	while (1)
+	{
+		if ((c = getchar()) == EOF)
+			return (EOF);
+		if (count < MAXBUF)
+			inpbuf[count++] = c;
+		if (c == '\n' && count < MAXBUF)
+		{
+			inpbuf[count] = '\0';
+			return count;
+		}
+
+		if (c == '\n')
+		{
+			printf("smallsh: input line too long\n");
+			count = 0;
+			printf("%s ", p);
+		}
+	}
+}
+
+int gettok(char **outptr)
+{
+	int type;
+	*outptr = ptr; //points to inpbuf
+	while (*ptr == ' ' || *ptr == '\t')
+		ptr++;
+	switch (*ptr++)
+	{
+	case '\n':
+		type = EOL;
+		break;
+	case '&':
+		type = AMPERSAND;
+		break;
+	case ';':
+		type = SEMICOLON;
+		break;
+	default:
+		type = ARG;
+
+		while (inarg(*ptr))
+			*ptr++;
+	}
+	//find the end of the line and replace that by '\0'
+	if (*ptr == '\n')
+	{
+		*ptr++ = '\0';
+		*ptr = '\n';
+	}
+	else
+	{
+		*ptr++ = '\0';
+	}
+
+	return type;
+}
+
+//****************************************************************************************
+static char special[] = {' ', '\t', '&', ';', '\n', '\0'};
+int inarg(char c)
+{
+	char *wrk;
+	for (wrk = special; *wrk; wrk++)
+	{
+		if (c == *wrk)
+			return (0);
+	}
+	return (1);
+}
+Command> man caT t
+[?1049h[22;0;0t[?1h=CAT(1)                                                                       User Commands                                                                       CAT(1)[m
+[m
+[1mNAME[0m[m
+       cat - concatenate files and print on the standard output[m
+[m
+[1mSYNOPSIS[0m[m
+       [1mcat[0m [[4mOPTION[24m]... [[4mFILE[24m]...[m
+[m
+[1mDESCRIPTION[0m[m
+       Concatenate FILE(s) to standard output.[m
+[m
+       With no FILE, or when FILE is -, read standard input.[m
+[m
+       [1m-A[0m, [1m--show-all[0m[m
+              equivalent to [1m-vET[0m[m
+[m
+       [1m-b[0m, [1m--number-nonblank[0m[m
+              number nonempty output lines, overrides [1m-n[0m[m
+[m
+       [1m-e[0m     equivalent to [1m-vE[0m[m
+[m
+       [1m-E[0m, [1m--show-ends[0m[m
+              display $ at end of each line[m
+[m
+       [1m-n[0m, [1m--number[0m[m
+              number all output lines[m
+[m
+       [1m-s[0m, [1m--squeeze-blank[0m[m
+              suppress repeated empty output lines[m
+[m
+       [1m-t[0m     equivalent to [1m-vT[0m[m
+[m
+       [1m-T[0m, [1m--show-tabs[0m[m
+              display TAB characters as ^I[m
+[m
+       [1m-u[0m     (ignored)[m
+[m
+       [1m-v[0m, [1m--show-nonprinting[0m[m
+              use ^ and M- notation, except for LFD and TAB[m
+[m
+       [1m--help[0m display this help and exit[m
+[m
+[7m Manual page cat(1) line 1 (press h for help or q to quit)[27m[K[K[?1l>[?1049l[23;0;0tCommand> ^C
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 4[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 4[00m$ exit
+exit
+
+Script done on 2020-11-22 16:48:55-05:00 [COMMAND_EXIT_CODE="130"]

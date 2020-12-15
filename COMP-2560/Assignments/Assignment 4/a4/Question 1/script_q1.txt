@@ -1,0 +1,53 @@
+Script started on 2020-11-22 14:54:00-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 1[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 1[00m$ cat Assignment4_q1.c 
+/*
+Name : Harnoor Singh Reen
+Student id: 110006294
+*/
+#include <stdio.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+//Writing "Hello World!" into the same file using two processes
+int main(int argc, char *argv[])
+{
+
+	int fd;
+	fd = open("hello.txt", O_CREAT | O_WRONLY, 0666); //Creating file descriptor
+
+	//Forking
+	if (fork() == 0)
+	{
+		printf("Child process is writing\n");
+		//Writing into the file from the child
+		write(fd, "Hello", 5);
+		close(fd); //Closing the file descriptor
+		exit(0);   //Exiting
+	}
+	else
+	{
+		printf("Parent process is waiting\n");
+		int status;
+		//Waiting for child to finish writing
+		wait(&status);
+		printf("Parent is writing\n");
+		//Writing into the file from the parent
+		write(fd, " World!\n", 7);
+		//This write() still works in spite of closing the file, this shows that
+		// the file descriptor is not shared by the parent and child processes.
+		//But they are copied, so they write in the same file, but the descriptors are
+		//different.
+	}
+}
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 1[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 1[00m$ gcc Assignment4_q1.c -o q1
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 1[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 1[00m$ ./q1
+Parent process is waiting
+Child process is writing
+Parent is writing
+]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 1[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 1[00m$ cat hello.txt
+Hello World!]0;reen@bravo: ~/Desktop/Systems Programming/Assignment 4/Question 1[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Assignment 4/Question 1[00m$ exit
+exit
+
+Script done on 2020-11-22 14:55:28-05:00 [COMMAND_EXIT_CODE="0"]

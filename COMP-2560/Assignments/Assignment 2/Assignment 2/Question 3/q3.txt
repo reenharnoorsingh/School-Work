@@ -1,0 +1,69 @@
+Script started on 2020-10-25 19:41:30-04:00 [TERM="xterm" TTY="/dev/pts/12" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ ct[Kat reverseFile.c
+/*
+ Using only standard I/O functions (like fopen(), fseek(), ftell(), fgets(), etc.), write a C
+program to reverse the order of the lines in a text file. That is the first line becomes
+last, the second line becomes the one before the last one and so on.
+ Note: your program should have two arguments, the input file name and the
+ output file name.
+*/
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    FILE *fp1, *fp2;
+    long len[100];
+    char buf[100];
+
+    fp1 = fopen(argv[1], "r");
+    fp2 = fopen(argv[2], "w");
+
+    if (fp1 == NULL)
+    {
+        printf("File not open!");
+        return -1;
+    }
+
+    int i = 1, j;
+    len[0] = 0;
+    //store the starting position of each line
+    while (!feof(fp1))
+    {
+        fgets(buf, 100, fp1);
+
+        if (feof(fp1))
+            break;
+        len[i] = ftell(fp1);
+        i++;
+    }
+
+    //write to the text file
+    for (j = i - 2; j >= 0; j--)
+    {
+        fseek(fp1, len[j], 0);
+        fgets(buf, 100, fp1);
+        fputs(buf, fp2);
+    }
+
+    //close the files
+    fclose(fp1);
+    fclose(fp2);
+
+    return 0;
+}
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ gcc reverseFile.c -o reverseFile
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ ls
+q3.txt  [0m[01;32mreverseFile[0m  reverseFile.c  time_q3.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ pico test.txt
+[?1049h[22;0;0t[1;43r[1;1H[J[7m  UW PICO 5.09                                                                         New Buffer                                                                           [27m[42;1H[K[43;1H[K[42;1H[7m^[27m[7mG[27m Get Help                 [7m^[27m[7mO[27m WriteOut                 [7m^[27m[7mR[27m Read File                [7m^[27m[7mY[27m Prev Pg                  [7m^[27m[7mK[27m Cut Text                 [7m^[27m[7mC[27m Cur Pos                  [K[43;1H[7m^[27m[7mX[27m Exit                     [7m^[27m[7mJ[27m Justify                  [7m^[27m[7mW[27m Where is                 [7m^[27m[7mV[27m Next Pg                  [7m^[27m[7mU[27m UnCut Text               [7m^[27m[7mT[27m To Spell                 [K[3;1H[41;1H                                                                                                                                                                            [41;81H[7m[ New file ][27m[1;1H[J[7m  UW PICO 5.09                                                                       File: test.txt                                                                         [27m[42;1H[K[43;1H[K[42;1H[7m^[27m[7mG[27m Get Help                 [7m^[27m[7mO[27m WriteOut                 [7m^[27m[7mR[27m Read File                [7m^[27m[7mY[27m Prev Pg                  [7m^[27m[7mK[27m Cut Text                 [7m^[27m[7mC[27m Cur Pos                  [K[43;1H[7m^[27m[7mX[27m Exit                     [7m^[27m[7mJ[27m Justify                  [7m^[27m[7mW[27m Where is                 [7m^[27m[7mV[27m Next Pg                  [7m^[27m[7mU[27m UnCut Text               [7m^[27m[7mT[27m To Spell                 [K[3;1H[1;82H[7mFile: test.txt                                                                   Modified[27m[3;1Hmna[3;3H [3;3H[3;2H [3;2H[3;1H [3;1Hmy[3;4Hname[3;9His[3;12HN[3;12H [3;12HBorat[4;1He[4;1H [4;1Hhello[42;1H                            [7mY[27m Yes                                                                                                                                       [K[43;2H[7mC[27m Cancel                   [7mN[27m No                                                                                                                                        [K[41;1H                                                                                                                                                                            [41;1H[7mSave modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                                                                                                                [41;62H[27m[7mYes[27m[41;1H                                                                                                                                                                            [41;1H[7mFile Name to write :                                                                                                                                                        [41;22H[27m[42;1H[7m^[27m[7mG[27m Get Help                 [7m^[27m[7mT[27m  To Files                                                                                                                                [K[43;29H[7mT[27m[7mA[27m[7mB[27m Complete                                                                                                                                [K[7m[41;22Htest.txt                                                                                                                                               [41;30H[27m[41;1H                                                                                                                                                                            [41;80H[7m[ Writing... ][27m[41;1H                                                                                                                                                                            [41;78H[7m[ Wrote 2 lines ][27m[42;1H[K[43;1H[K[?1049l[23;0;0t]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ ls
+q3.txt  [0m[01;32mreverseFile[0m  reverseFile.c  test.txt  time_q3.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ ./reverseFile tex[Kst.txt outpuy[Kt.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ cat output.txt
+hello
+my name is Borat
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ cat test.t[K[K[K[K[K[K[K[K[K[Keit
+bash: eit: command not found
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 2/Question 3[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 2/Question 3[00m$ exit
+exit
+
+Script done on 2020-10-25 19:46:58-04:00 [COMMAND_EXIT_CODE="127"]

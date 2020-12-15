@@ -1,0 +1,62 @@
+Script started on 2020-11-29 14:27:20-05:00 [TERM="xterm" TTY="/dev/pts/4" COLUMNS="100" LINES="35"]
+]0;reen@charlie: ~/Desktop/Systems Programming/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/Systems Programming/Lab 8[00m$ cat lab08_q2.c 
+/*
+Name : Harnoor Singh Reen
+Student id : 110006294
+*/
+#include <stdio.h>
+#include <string.h>
+#include <signal.h>
+#include <unistd.h>
+
+int main()
+{
+
+    //First we create a child process using fork()
+    pid_t pid;
+    pid = fork();
+    int i, a = 1;
+
+    //Using if and else we differentiate child and parent process
+    if (pid == 0)
+    {
+        //We create an infite loop in child process with help of for loop
+        for (i = 0; i <= a; i++)
+        {
+            printf("Line number:%d\n", a);
+            a++;
+            sleep(3);
+        }
+    }
+    else
+    {
+
+        //We do make it sleep and do the following as said in c),d),e)
+        sleep(8);
+        kill(pid, SIGSTOP);
+        sleep(5);
+        kill(pid, SIGCONT);
+        sleep(8);
+        kill(pid, SIGINT);
+    }
+
+    return 0;
+}
+/*
+In this program we observe:
+The SIGSTOP signals are used to stop a process from executing.
+The SIGCONT signals are used to continue the process's execution after being stopped, 
+i.e with using SIGSTOP then we can use SIGCONT to continue.
+The SIGINT signals are used to start an interruption which basically kills that process.
+*/]0;reen@charlie: ~/Desktop/Systems Programming/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/Systems Programming/Lab 8[00m$ gcc lab08_q2.c -o q2
+]0;reen@charlie: ~/Desktop/Systems Programming/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/Systems Programming/Lab 8[00m$ ./q2
+Line number:1
+Line number:2
+Line number:3
+Line number:4
+Line number:5
+Line number:6
+]0;reen@charlie: ~/Desktop/Systems Programming/Lab 8[01;32mreen@charlie[00m:[01;34m~/Desktop/Systems Programming/Lab 8[00m$ exit
+exit
+
+Script done on 2020-11-29 14:28:28-05:00 [COMMAND_EXIT_CODE="0"]

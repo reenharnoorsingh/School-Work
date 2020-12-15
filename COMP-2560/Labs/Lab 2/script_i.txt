@@ -1,0 +1,120 @@
+Script started on 2020-10-04 09:21:25-04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ exitgdb -tui ./copyexit[K[Kgcc -g ci[Kopy.c -oi[K copy
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ ./copy copy.c copy.bak
+writing problem : Bad file descriptor
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ gdb --[Ktui ./xc[K[Kcopy
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[H[2J[16d(B[0;7mNone No process In:                                                L??   PC: ?? [17;1H(B[m[H   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B[2;4H(0[0mx(B[80G(0[0mx(B[3;4H(0[0mx(B[80G(0[0mx(B[4;4H(0[0mx(B[80G(0[0mx(B[5;4H(0[0mx(B[80G(0[0mx(B[6;4H(0[0mx(B[80G(0[0mx(B[7;4H(0[0mx(B[80G(0[0mx(B[8;4H(0[0mx(B[80G(0[0mx(B[9;4H(0[0mx(B[80G(0[0mx(B[10;4H(0[0mx(B[80G(0[0mx(B[11;4H(0[0mx(B[80G(0[0mx(B[12;4H(0[0mx(B[80G(0[0mx(B[13;4H(0[0mx(B[80G(0[0mx(B[14;4H(0[0mx(B[80G(0[0mx(B[15;4H(0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B[1;4H(0[0m(B[8;18H[ No Source Available ][8;18H[23X[H   [8;18H[ No Source Available ][H[8;41H[?1h=[17d[H[2J   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B[2;4H(0[0mx(B[80G(0[0mx(B[3;4H(0[0mx(B[80G(0[0mx(B[4;4H(0[0mx(B[80G(0[0mx(B[5;4H(0[0mx(B[80G(0[0mx(B[6;4H(0[0mx(B[80G(0[0mx(B[7;4H(0[0mx(B[80G(0[0mx(B[8;4H(0[0mx(B[8;18H(0[0m(B[ No Source Available ][80G(0[0mx(B[9;4H(0[0mx(B[80G(0[0mx(B[10;4H(0[0mx(B[80G(0[0mx(B[11;4H(0[0mx(B[80G(0[0mx(B[12;4H(0[0mx(B[80G(0[0mx(B[13;4H(0[0mx(B[80G(0[0mx(B[14;4H(0[0mx(B[80G(0[0mx(B[15;4H(0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B[16;1H(0[0m(B[0;7mNone No process In:                                                L??   PC: ?? [1;1H(B[m[8;41H[16d[H   (0[0;1;7mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B(B[m[2;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[3;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[4;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[5;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[6;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[7;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[8;4H(0[0;1;7mx(B(B[m[8;18H(0[0;1;7m(B(B[m[23X[80G(0[0;1;7mx(B(B[m[9;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[10;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[11;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[12;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[13;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[14;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[15;4H(0[0;1;7mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B(B[m[1;4H(0[0;1;7m(B(B[m[8;18H[ No Source Available ][H[17dGNU gdb (Debian 8.2.1-2+b3) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+--Type <RET> for more, q to quit, c to continue without paging--[17dType "show configuration" for configuration details.
+For bug reporting instructions, please see:[K
+<http://www.gnu.org/software/gdb/bugs/>.[K
+Find the GDB manual and other documentation resources online at:[K
+    <http://www.gnu.org/software/gdb/documentation/>
+[K
+For help, type "help".[K[24;65H[17d[2M[23dType "apropos word" to search for commands related to "word"...
+Reading symbols from ./copy...[17d[M[23;31Hdone.
+[1;7H(B[0;1;7mcopy.c
+[5G(B[m6[13Gint main(int argc, char *argv[]){
+[5G7[3;14Hint fd1, fd2;
+[5G8[4;14Hchar buffer[100];  long int n1;
+[5G9
+10[14Gif(((fd1 = open(argv[1], O_RDONLY)) == -1) ||  ((fd2 = open(argv[2
+[5G11[7;20HO_CREAT|O_WRONLY|O_TRUNC,0700)) == -1)){
+[5G12[8;18Hperror("file problem ");
+[5G13[9;18Hexit(1);
+[5G14[14G}
+[5G15
+16[14Gwhile((n1=read(fd1, buffer, 512) > 0))
+[5G17[13;19Hif(write(fd2, buffer, n1) != n1){
+[5G18[14;26Hperror("writing problem ");  exit(3);[1;13H[15d
+(B[0;7mexec
+(B[m[1;13H[15d
+
+[24d(gdb) b 16[H[12db+
+
+
+
+
+[2M[23dBreakpoint 1 at 0x123b: file copy.c, line 16.
+(gdb) r copy.c coy py.bak[17d[3M[22dStarting program: /home/reen/Desktop/Systems Programming/Lab 2/copy copy.c copy.[23;1Hbak
+[1;13H[12d  [H[12db+
+
+
+
+(B[0;7mnative process 6864 In:
+(B[m[24d[1;13H[12d  [H[12db+
+
+
+
+
+[24d[1;13H[12d  [H[12db+
+
+
+
+
+[24d[12d  [H[12dB+
+
+
+
+
+[2M[23dBreakpoint 1, main (argc=3, argv=0x7fffffffd948) at copy.c:16
+[16;25H(B[0;7mmain[16;56HL16   PC: 0x55555555523b
+(B[m[12;5H(B[0;7m16       while((n1=read(fd1, buffer, 512) > 0))  [80G(B[m  [H[12dB+>
+
+
+[24d(gdb) print fd1[17d[M[24d$1 = 3[17d[M[24d(gdb) print f1 d1 2[17d[M[24d$2 = 4[17d[M[24d(gdb) prio nt n1[17d[M[24d$3 = 140737488345408[17d[M[24d(gdb) n[17d[M[24d[16;58H(B[0;7m7[78G0a
+(B[m[2;14r[14;1H[6S[1;24r[6;1H   (0[0;1;7mx(B(B[m16       while((n1=read(fd1, buffer, 512) > 0))  
+[5G(B[0;7m17            if(write(fd2, buffer, n1) != n1){
+
+[4G(0[0;1;7mx(B(B[m19[9;20H}[80G(0[0;1;7mx(B(B[m[10;4H(0[0;1;7mx(B(B[m20[80G(0[0;1;7mx(B(B[m[11;4H(0[0;1;7mx(B(B[m21[13G// Case of an error exit from the loop[80G(0[0;1;7mx(B(B[m[12;1H(0[0;1;7m(B(B[mB+>(0[0;1;7mx(B(B[m22[14Gif(n1 == -1){[80G(0[0;1;7mx(B(B[m[13;4H(0[0;1;7mx(B(B[m23[13;17Hperror("Reading problem ");[80G(0[0;1;7mx(B(B[m[14;4H(0[0;1;7mx(B(B[m24[14;17Hexit(2);[80G(0[0;1;7mx(B(B[m[1;13H(0[0;1;7m(B(B[m[12d   [H[6dB+
+>[15d[6d  
+ [H[6dB+
+>[15d[24d(gdb) print fd1[17d[M[24d$4 = 845440544[17d[M[24d(gdb) print fd2[17d[M[24d$5 = 741434470[17d[M[24d(gdb) prn int n1[17d[M[24d$6 = 1[17d[M[24d(gdb) n[17d[M[24d[16;58H(B[0;7m8[78G25
+(B[m[7;5H17            if(write(fd2, buffer, n1) != n1){
+[5G(B[0;7m18                   perror("writing problem ");  exit(3);[80G(B[m[6d  
+ [H[6dB+
+
+>[15d[24d(gdb) n[17d[M[24dwriting problem : Bad file descriptor
+[17d[M[23d[Inferior 1 (process 6864) exited with code 03]
+[16;8H(B[0;7mNo process In: main  
+(B[m[16;23H(B[0;7m    [16;56H            L??   PC: ??
+(B[m[2;5H  [2;18H[24X
+[5G  [3;18H        
+[5G  [14G 
+[5G  
+  [14G[38X
+[5G  [7;19H[33X
+[5G[58X
+  [9;20H 
+[5G  
+  [13G[38X
+[5G  [14G             
+[5G  [13;17H[27X
+[5G  [14;17H        [1;13H[8;18H[ No Source Available ][6d  
+
+ [H[15d[2;5H6[13Gint main(int argc, char *argv[]){
+[5G7[3;14Hint fd1, fd2;
+[5G8[4;14Hchar buffer[100];  long int n1;
+[5G9
+10[14Gif(((fd1 = open(argv[1], O_RDONLY)) == -1) ||  ((fd2 = open(argv[2
+[5G11[7;20HO_CREAT|O_WRONLY|O_TRUNC,0700)) == -1)){
+[5G12[8;18Hperror("file problem ");
+[5G13[9;18Hexit(1);
+[5G14[14G}
+[5G15
+16[14Gwhile((n1=read(fd1, buffer, 512) > 0))
+[5G17[13;19Hif(write(fd2, buffer, n1) != n1){
+[5G18[14;26Hperror("writing problem ");  exit(3);[1;13H[12dB+
+
+
+
+
+[24d(gdb) q[24;1H[?1049l[23;0;0t[?1l>]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ exit
+exit
+
+Script done on 2020-10-04 09:29:16-04:00 [COMMAND_EXIT_CODE="0"]

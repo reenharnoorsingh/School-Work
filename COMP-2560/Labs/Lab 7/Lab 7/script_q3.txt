@@ -1,0 +1,194 @@
+Script started on 2020-11-22 15:14:46-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ cat ~[K[K[K[K[Kcat 3a.c
+/*
+Name: Harnoor Singh Reen
+Student id: 110006294
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/wait.h>
+void INThandler(int);
+
+int main(int argc, char *argv[])
+{
+    int i;
+    void (*oldHandler1)(); //to save default handlers
+    void (*oldHandler2)(); //for CTRL-C and CTRL-Z
+
+    oldHandler1 = signal(SIGINT, SIG_IGN);  //ignore Terminal interrupt signal
+    oldHandler2 = signal(SIGTSTP, SIG_IGN); // ignore Terminal stop signal
+    for (i = 1; i <= 10; i++)
+    {
+        printf("I am not sensitive to CTRL-C/CTRL-Z\n");
+        sleep(1);
+    }
+    signal(SIGINT, INThandler);
+    for (int i = 0; i <= 10; i++)
+    {
+        printf("i am sensitive to CTRL-C\n");
+        sleep(1);
+    }
+    return 0;
+}
+
+void INThandler(int sig)
+{
+
+    printf("\nCTRL-C pressed\n");
+    exit(0);
+}]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ 
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ ca[Kd[K[Kgcc 3a.c -o 3a
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ ./3a
+I am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+^Zi am sensitive to CTRL-C
+i am sensitive to CTRL-C
+^C
+CTRL-C pressed
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ cat 3c.c -o [K[K[K[K[Kc
+/*
+Name: Harnoor Singh Reen
+Student id: 110006294
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/wait.h>
+void INThandler(int);
+
+int main(int argc, char *argv[])
+{
+    int i;
+    pid_t pid;
+
+    void (*oldHandler1)(); //to save default handlers
+    void (*oldHandler2)(); //for CTRL-C and CTRL-Z
+
+    oldHandler1 = signal(SIGINT, SIG_IGN);  //ignore CTRL-C
+    oldHandler2 = signal(SIGTSTP, SIG_IGN); // ignore CTRL-Z
+
+    pid = fork();
+
+    if (pid < 0)
+    {
+        perror("fork");
+        exit(1);
+    }
+    if (pid == 0)
+    {
+        while (1)
+        {
+            printf("do nothing program.\n");
+            sleep(1);
+        }
+    }
+    else if (pid > 0)
+    {
+        //signal(SIGINT, INThandler);
+        for (i = 1; i <= 3; i++)
+        {
+            printf("I am in parent process.\n");
+            //send a signal to child
+            kill(pid, SIG_IGN);
+            sleep(1);
+        }
+    }
+
+    for (i = 1; i <= 10; i++)
+    {
+        printf("I am not sensitive to CTRL-C/CTRL-Z\n");
+        sleep(1);
+    }
+    signal(SIGINT, INThandler);
+    for (int i = 0; i <= 10; i++)
+    {
+        printf("I am sensitive to CTRL-C\n");
+        sleep(1);
+    }
+    return 0;
+}
+
+void INThandler(int sig)
+{
+
+    printf("\n Ctrl-C Pressed\n");
+    exit(0);
+}]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ gcc 3c.c -o 3c
+[01m[K3c.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[K3c.c:45:23:[m[K [01;35m[Kwarning: [m[Kpassing argument 2 of ‘[01m[Kkill[m[K’ makes integer from pointer without a cast [[01;35m[K-Wint-conversion[m[K]
+             kill(pid, [01;35m[KSIG_IGN[m[K);
+                       [01;35m[K^~~~~~~[m[K
+In file included from [01m[K3c.c:8[m[K:
+[01m[K/usr/include/signal.h:112:37:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kint[m[K’ but argument is of type ‘[01m[Kvoid (*)(int)[m[K’
+ extern int kill (__pid_t __pid, [01;36m[Kint __sig[m[K) __THROW;
+                                 [01;36m[K~~~~^~~~~[m[K
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ ./3c
+I am in parent process.
+I am in parent process.
+I am in parent process.
+^XI am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am sensitive to CTRL-C
+^ZI am sensitive to CTRL-C
+I am sensitive to CTRL-C
+^C
+ Ctrl-C Pressed
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ nano cat[K[K[K3c.c
+[?1049h[22;0;0t[1;43r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[41;79H(B[0;7m[ Reading File ](B[m[41;64H(B[0;7m[ Read 69 lines (Converted from DOS format) ](B[m[H(B[0;7m  GNU nano 3.2                                                                        3c.c                                                                                  [1;171H(B[m[42d(B[0;7m^G(B[m Get Help[18G(B[0;7m^O(B[m Write Out     (B[0;7m^W(B[m Where Is[52G(B[0;7m^K(B[m Cut Text[69G(B[0;7m^J(B[m Justify[86G(B[0;7m^C(B[m Cur Pos[103G(B[0;7mM-U(B[m Undo[42;120H(B[0;7mM-A(B[m Mark Text    (B[0;7mM-](B[m To Bracket   (B[0;7mM-Q(B[m Previous[43d(B[0;7m^X(B[m Exit[43;18H(B[0;7m^R(B[m Read File     (B[0;7m^\(B[m Replace[52G(B[0;7m^U(B[m Uncut Text    (B[0;7m^T(B[m To Spell[86G(B[0;7m^_(B[m Go To Line    (B[0;7mM-E(B[m Redo[43;120H(B[0;7mM-6(B[m Copy Text    (B[0;7m^Q(B[m Where Was     (B[0;7mM-W(B[m Next[41d[3d(B[0;1m[34m/*[4dName: Harnoor Singh Reen[5dStudent id: 110006294[6d*/[7d[36m#include[39m(B[m (B[0;1m[33m<stdio.h>[8d[36m#include[39m(B[m (B[0;1m[33m<stdlib.h>[9d[36m#include[39m(B[m (B[0;1m[33m<unistd.h>[10d[36m#include[39m(B[m (B[0;1m[33m<signal.h>[11d[36m#include[39m(B[m (B[0;1m[33m<sys/wait.h>[12d(B[0m[32mvoid[39m(B[m INThandler([32mint[39m(B[m);[14d[32mint[39m(B[m main([32mint[39m(B[m argc, [32mchar[39m(B[m *argv[])[15d{[16;5H[32mint[39m(B[m i;[17;5Hpid_t pid;[19;5H[32mvoid[39m(B[m (*oldHandler1)(); (B[0;1m[34m//to save default handlers[20;5H(B[0m[32mvoid[39m(B[m (*oldHandler2)(); (B[0;1m[34m//for CTRL-C and CTRL-Z[22;5H[39m(B[moldHandler1 = signal((B[0;1m[31mSIGINT[39m(B[m, (B[0;1m[31mSIG_IGN[39m(B[m);  (B[0;1m[34m//ignore CTRL-C[23;5H[39m(B[moldHandler2 = signal((B[0;1m[31mSIGTSTP[39m(B[m, (B[0;1m[31mSIG_IGN[39m(B[m); (B[0;1m[34m// ignore CTRL-Z[25;5H[39m(B[mpid = fork();[27;5H(B[0;1m[33mif[39m(B[m (pid < 0)[28;5H{[29;9Hperror((B[0;1m[33m"fork"[39m(B[m);[30;9Hexit(1);[31;5H}[32d(B[0;1m[33mif[39m(B[m (pid == 0)[33;5H{[34;9H(B[0;1m[33mwhile[39m(B[m (1)[35;9H{[36;13Hprintf((B[0;1m[33m"do nothing program.\n"[39m(B[m);[37;13Hsleep(1);[38;9H}[39;5H}[40d(B[0;1m[33melse[39m(B[m (B[0;1m[33mif[39m(B[m (pid > 0)[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[19d[?12l[?25h[?25l[20d[?12l[?25h[?25l[21d[?12l[?25h[?25l[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[25d[?12l[?25h[?25l[26d[?12l[?25h[?25l[27d[?12l[?25h[?25l[28d[?12l[?25h[?25l[41d[K[29d[?12l[?25h[?25l[30d[?12l[?25h[?25l[31d[?12l[?25h[?25l[32d[?12l[?25h[?25l[33d[?12l[?25h[?25l[34d[?12l[?25h[?25l[35d[?12l[?25h[?25l[36d[?12l[?25h[?25l[37d[?12l[?25h[?25l[38d[?12l[?25h[?25l[39d[?12l[?25h[?25l[40d[?12l[?25h[?25l7[2;41r8[41d[19S[1;43r[22;5H{[23;9H(B[0;1m[34m//signal(SIGINT, INThandler);[24;9H[33mfor[39m(B[m (i = 1; i <= 3; i++)[25;9H{[26;13Hprintf((B[0;1m[33m"I am in parent process.\n"[39m(B[m);[27;13H(B[0;1m[34m//send a signal to child[28;13H[39m(B[mkill(pid, (B[0;1m[31mSIG_IGN[39m(B[m);[29;13Hsleep(1);[30;9H}[31;5H}[33d(B[0;1m[33mfor[39m(B[m (i = 1; i <= 10; i++)[34;5H{[35;9Hprintf((B[0;1m[33m"I am not sensitive to CTRL-C/CTRL-Z\n"[39m(B[m);[36;9Hsleep(1);[37;5H}[38dsignal((B[0;1m[31mSIGINT[39m(B[m, INThandler);[39;5H(B[0;1m[33mfor[39m(B[m ([32mint[39m(B[m i = 0; i <= 10; i++)[40;5H{[22d[?12l[?25h[?25l[23d[?12l[?25h[?25l[24d[?12l[?25h[?25l[25d[?12l[?25h[?25l[26d[?12l[?25h[?25l[27d[?12l[?25h[?25l[28d[?12l[?25h[?25l[29d[?12l[?25h[?25l[30d[?12l[?25h[?25l[31d[?12l[?25h[?25l[32d[?12l[?25h[?25l[33d[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[24d[?12l[?25h[?25l [?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l [?12l[?25h[?25l([?12l[?25h[?25li[?12l[?25h[?25l [?12l[?25h[?25l=[?12l[?25h[?25l [?12l[?25h[?25l1[?12l[?25h[?25l;[?12l[?25h[?25l [?12l[?25h[?25li[?12l[?25h[?25l [?12l[?25h[?25l<[?12l[?25h[?25l=[?12l[?25h[?25l [?12l[?25h[?25l3[?12l[?25h[?25l[1;163H(B[0;7mModified(B[m[24;26H[1P[?12l[?25h[?25l1; i++)[27G[?12l[?25h[?25l0; i++)[28G[?12l[?25h[?25l[1;171H[1;163H(B[0;7m        (B[m[41;78H(B[0;7m[ Wrote 69 lines ](B[m[24;28H[?12l[?25h[?25l[41d[J[43;172H[?12l[?25h[43;1H[?1049l[23;0;0t[?1l>]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ nano 3c.c[5P./3cgcc 3c.c -o 3c
+[01m[K3c.c:[m[K In function ‘[01m[Kmain[m[K’:
+[01m[K3c.c:45:23:[m[K [01;35m[Kwarning: [m[Kpassing argument 2 of ‘[01m[Kkill[m[K’ makes integer from pointer without a cast [[01;35m[K-Wint-conversion[m[K]
+             kill(pid, [01;35m[KSIG_IGN[m[K);
+                       [01;35m[K^~~~~~~[m[K
+In file included from [01m[K3c.c:8[m[K:
+[01m[K/usr/include/signal.h:112:37:[m[K [01;36m[Knote: [m[Kexpected ‘[01m[Kint[m[K’ but argument is of type ‘[01m[Kvoid (*)(int)[m[K’
+ extern int kill (__pid_t __pid, [01;36m[Kint __sig[m[K) __THROW;
+                                 [01;36m[K~~~~^~~~~[m[K
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ gcc 3c.c -o 3c[5Pnano 3c.c[5P./3c
+I am in parent process.
+I am in parent process.
+I am in parent process.
+^ZI am in parent process.
+I am in parent process.
+^CI am in parent process.
+I am in parent process.
+I am in parent process.
+^ZI am in parent process.
+I am in parent process.
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^CI am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+I am not sensitive to CTRL-C/CTRL-Z
+^ZI am not sensitive to CTRL-C/CTRL-Z
+I am sensitive to CTRL-C
+^ZI am sensitive to CTRL-C
+I am sensitive to CTRL-C
+^C
+ Ctrl-C Pressed
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ exit
+exit
+
+Script done on 2020-11-22 15:18:52-05:00 [COMMAND_EXIT_CODE="0"]

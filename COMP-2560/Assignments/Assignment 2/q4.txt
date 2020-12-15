@@ -1,0 +1,6 @@
+I think the potential problem here is the do while loop Since it checks the condition
+after the program is run whereas when using EOF we would ideally want the condition
+to be checked after we push the character 
+
+So,
+Instead of do-while I will use the while loop in this case

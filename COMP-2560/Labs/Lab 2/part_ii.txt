@@ -1,0 +1,22 @@
+(ii) A short text file explaining what the cause of the problem might be (why the file descriptors
+are corrupted?). The answer to this question is probably beyond the scope of this course. Use
+your best guess.
+
+ANSWER -
+while((n1=read(fd1, buffer, 512) > 0)) , it should not be 512, but 1 so that it reads one data at a time.
+Also,in the loop ,the comparison is not proper, because we are only comparing the read part with 0, 
+but we should be comparing n1.
+Q-FILE DESCRIPTORS can be corrupted 
+ANS-because they may have an invalid value.
+it is maybe negative ordoes not represent the currently open file.
+
+
+
+Q2(f part)- Compare the values of fd1 and fd2 you saw in e) with the values of fd1 and fd2 you
+inspected in d). Are the fd1 and fd2 values the same in d) and e). What’s the n1
+value? Is it what you expected? 
+
+ANSWER-no, the values of fd1 and fd2 are different. 
+The values for fd1 and fd2 for part d) was 2 and 4 respectively but in part e) there is a 
+huge difference in those values fd1 and fd2 become 845440544 and 741434470 and n1 when printed out is 1 which
+is expected because the values change when execution stops at different points.

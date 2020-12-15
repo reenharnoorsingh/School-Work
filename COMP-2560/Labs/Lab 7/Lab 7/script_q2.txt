@@ -1,0 +1,47 @@
+Script started on 2020-11-22 15:04:14-05:00 [TERM="xterm" TTY="/dev/pts/9" COLUMNS="172" LINES="43"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ cat lab7_2.c 
+/*
+Name: Harnoor Singh Reen
+Student id: 110006294
+*/
+#include <stdio.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+void signal_handler(int dummy)
+{
+
+	int status;
+	wait(&status);
+
+	printf("Exit status: %d\n", WEXITSTATUS(status));
+}
+
+int main(int argc, char *argv[])
+{
+
+	signal(SIGCHLD, signal_handler);
+	int pid = fork(), status;
+	if (pid == 0)
+	{
+		sleep(5);
+		printf("I am the child\n");
+		exit(7);
+	}
+	else
+	{
+		printf("I am the parent\n");
+		wait(&status);
+	}
+}
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ gcc lab7_2.c -o q2
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ ./q2
+I am the parent
+I am the child
+Exit status: 127
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 7[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 7[00m$ exit
+exit
+
+Script done on 2020-11-22 15:05:01-05:00 [COMMAND_EXIT_CODE="0"]

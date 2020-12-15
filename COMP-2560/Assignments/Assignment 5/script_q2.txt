@@ -1,0 +1,124 @@
+Script started on 2020-12-01 10:11:57-05:00 [TERM="xterm" TTY="/dev/pts/2" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ cat Assign_q2.c
+/*
+Name: Harnoor Singh Reen
+Student ID: 110006294
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(int argc, char const *argv[])
+{
+   int pipefds[2];
+   int returnStatus;
+   int pid, pid1;
+   int readMessage[1];
+   returnStatus = pipe(pipefds);
+   if (returnStatus == -1)
+   {
+      printf("Unable to create pipe\n");
+      return 1;
+   }
+   pid = fork();
+   // Child process
+   if (pid != 0)
+   {
+      pid1 = fork();
+      if (pid1 != 0)
+      {
+         for (int i = 0; i < 10; i++)
+         {
+            read(pipefds[0], readMessage, sizeof(readMessage));
+            printf("%d is the number read by parent\n", readMessage[0]);
+         }
+      }
+      else
+      {
+         for (int i = 0; i < 5; i++)
+         {
+            int randNo = rand() % 100;
+            printf("Child Process 2 - Writing to pipe - Message 1 is %d\n", randNo);
+            write(pipefds[1], &randNo, sizeof(randNo));
+         }
+      }
+   }
+   else
+   {
+      for (int i = 0; i < 5; i++)
+      {
+         int randNo = rand() % 100;
+         printf("Child Process 1- Writing to pipe - Message 1 is %d\n", randNo);
+         write(pipefds[1], &randNo, sizeof(randNo));
+      }
+   }
+   return 0;
+}
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ gcc -[KAssign_q2.c =o q2[1P[1@-[C[C[C[C
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q2
+Child Process 1- Writing to pipe - Message 1 is 83
+Child Process 1- Writing to pipe - Message 1 is 86
+Child Process 1- Writing to pipe - Message 1 is 77
+Child Process 1- Writing to pipe - Message 1 is 15
+Child Process 1- Writing to pipe - Message 1 is 93
+Child Process 2 - Writing to pipe - Message 1 is 83
+Child Process 2 - Writing to pipe - Message 1 is 86
+Child Process 2 - Writing to pipe - Message 1 is 77
+Child Process 2 - Writing to pipe - Message 1 is 15
+Child Process 2 - Writing to pipe - Message 1 is 93
+83 is the number read by parent
+86 is the number read by parent
+77 is the number read by parent
+15 is the number read by parent
+93 is the number read by parent
+83 is the number read by parent
+86 is the number read by parent
+77 is the number read by parent
+15 is the number read by parent
+93 is the number read by parent
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q2
+Child Process 1- Writing to pipe - Message 1 is 83
+Child Process 2 - Writing to pipe - Message 1 is 83
+Child Process 1- Writing to pipe - Message 1 is 86
+Child Process 2 - Writing to pipe - Message 1 is 86
+Child Process 1- Writing to pipe - Message 1 is 77
+Child Process 2 - Writing to pipe - Message 1 is 77
+Child Process 1- Writing to pipe - Message 1 is 15
+Child Process 2 - Writing to pipe - Message 1 is 15
+Child Process 1- Writing to pipe - Message 1 is 93
+Child Process 2 - Writing to pipe - Message 1 is 93
+83 is the number read by parent
+83 is the number read by parent
+86 is the number read by parent
+86 is the number read by parent
+77 is the number read by parent
+77 is the number read by parent
+15 is the number read by parent
+15 is the number read by parent
+93 is the number read by parent
+93 is the number read by parent
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q2
+Child Process 1- Writing to pipe - Message 1 is 83
+Child Process 2 - Writing to pipe - Message 1 is 83
+Child Process 1- Writing to pipe - Message 1 is 86
+Child Process 1- Writing to pipe - Message 1 is 77
+Child Process 2 - Writing to pipe - Message 1 is 86
+Child Process 1- Writing to pipe - Message 1 is 15
+Child Process 2 - Writing to pipe - Message 1 is 77
+Child Process 1- Writing to pipe - Message 1 is 93
+Child Process 2 - Writing to pipe - Message 1 is 15
+Child Process 2 - Writing to pipe - Message 1 is 93
+83 is the number read by parent
+86 is the number read by parent
+83 is the number read by parent
+77 is the number read by parent
+86 is the number read by parent
+15 is the number read by parent
+77 is the number read by parent
+93 is the number read by parent
+15 is the number read by parent
+93 is the number read by parent
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ EXIT[K[K[K[KEXIT[K[K[K[Kexit
+exit
+
+Script done on 2020-12-01 10:13:37-05:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,8 @@
+the value of char c is changed to unsigned char c.Now,
+because EOF is a signed int and ch is an unsigned char.the do-while loop will never end because 
+in the statement ch!=EOF,
+we mean (unsigned char)ch ! = (int)EOF
+this can not be right.
+the range of unsigned char is 0-255 whereas EOF is -1.
+
+therefore ch can never be equal to EOF, hence the loop never terminates. 

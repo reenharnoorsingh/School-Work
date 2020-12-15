@@ -1,0 +1,118 @@
+Script started on 2020-12-01 10:14:29-05:00 [TERM="xterm" TTY="/dev/pts/2" COLUMNS="172" LINES="43"]
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ cat Assign_q3.c
+/*
+Name: Harnoor Singh Reen
+Student ID: 110006294
+*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+int main(int argc, char const *argv[])
+{
+    int fd[2]; // to store pipe file ends
+    pipe(fd);
+    int pid = fork(); // forking to create child and parent process
+
+    // if process is child
+    if (pid == 0)
+    {
+        close(fd[0]); // closing unusable pipe end
+        FILE *fp;
+        fp = popen(argv[1], "r"); // running command
+
+        if (fp == NULL)
+        {
+            printf("Failed to run command\n");
+            exit(1);
+        }
+        char msg[10005]; // array to hold command result
+
+        // while there is command result writing to pipe
+        while (fgets(msg, sizeof(msg), fp) != NULL)
+        {
+            write(fd[1], msg, strlen(msg) + 1); // writing to pipe
+            sleep(0.1);                         // sleep child process until ast line is read from pipr by parent process and write to result.txt
+        }
+
+        pclose(fp);   // closing command output
+        close(fd[1]); // closing pipe another end
+    }
+    else
+    {
+        close(fd[1]);    // closing unusable pipe end in parent
+        char res[10005]; // array to store data reading from pipe
+        int bytesread, totalbytes = 0;
+        ;
+
+        // opening file result.y=txt
+        FILE *fptr = fopen("result.txt", "w");
+        if (fptr == NULL)
+        {
+            printf("Failed to open result.txt\n");
+            exit(1);
+        }
+
+        // while there is data in pipe
+        while ((bytesread = read(fd[0], res, 10000)) > 0)
+        {
+            totalbytes += bytesread;
+            fprintf(fptr, "%s", res); // writing to file result.txt
+        }
+        printf("The result of %s is written into result.txt with total %d bytes.\n", argv[1], totalbytes);
+        fclose(fptr); // closing result.txt
+        close(fd[0]); // closing pipe other end
+    }
+    return 0;
+}
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ gcc Assign_q3.c -o q3
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q3
+sh: 0: -c requires an argument
+The result of (null) is written into result.txt with total 0 bytes.
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ls
+Assign_q1.c  Assign_q2.c  Assign_q3.c  [0m[01;32mq1[0m  [01;32mq2[0m  [01;32mq3[0m  result.txt  script_q1.txt  script_q2.txt  script_q3.txt  time_q1.txt  time_q2.txt  time_q3.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q3 ls
+The result of ls is written into result.txt with total 147 bytes.
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ cat result.txt
+Assign_q1.c
+Assign_q2.c
+Assign_q3.c
+q1
+q2
+q3
+result.txt
+script_q1.txt
+script_q2.txt
+script_q3.txt
+time_q1.txt
+time_q2.txt
+time_q3.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ mare[K[K[Kore result.txt
+Assign_q1.c
+Assign_q2.c
+Assign_q3.c
+q1
+q2
+q3
+result.txt
+script_q1.txt
+script_q2.txt
+script_q3.txt
+time_q1.txt
+time_q2.txt
+time_q3.txt
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ ./q3 uname
+The result of uname is written into result.txt with total 7 bytes.
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ more result.txt
+Linux
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ od -c result.txt
+0000000   L   i   n   u   x  \n
+0000006
+]0;reen@alpha: ~/Desktop/Systems Programming/Assignment 5[01;32mreen@alpha[00m:[01;34m~/Desktop/Systems Programming/Assignment 5[00m$ exit
+exit
+
+Script done on 2020-12-01 10:17:30-05:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,17 @@
+a) File Size: -rw-r--r-- 1 reen temp 418 Oct 11 18:51 filesize2.c
+
+b)	 fseek(fd, 10L, SEEK_SET);
+	 putc(-1, fd);	
+	 rewind(fd); 
+
+     With using the fseek function we set the pointer of at
+     the 10th position using SEEK_SET. By using putc we over-write
+     the file with -1 (which is EOF). And then by using the rewind function
+     we printout the the new contents with EOF at the pointer position 10.
+
+c) File size for uncommented filesize2.c is 10
+
+The sizes reported in a and c are different because after we remove the comments, 
+the program terminates after the first 10 characters as it finds a -1.
+so the size is only 10.
+whereas in the original, the program doesnt terminate.

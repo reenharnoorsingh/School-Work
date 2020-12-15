@@ -1,0 +1,21 @@
+Explanation of pcsc1.txt :-
+
+In the original program parent runs and then it switches to child process 
+where as when we make the required edits for the first case only the Child process 
+runs and returns the User defined signal, this is probably because 
+when we interchange pause() in the child process compared to the original reference case.
+The child process is started with that print statement of child is executed and then the signal is printed,
+so first the kill() is called and then the pause() is called
+
+Explanation of pcsc2.txt :-
+
+When we interchange the position of pause() in parent process in refrence to originial code 
+First pause() is called and then kill() is called in the parent process 
+but are we are in an infinte loop the program doesnt terminate
+
+Explanation of pcsc3.txt :-
+
+When we interchange the pause() and kill(getppid(),SIGUSR1) 
+compared to the original one in both parent and child process
+The child process begins first and then the signal prints. 
+So the kill() is called first and then pause().  

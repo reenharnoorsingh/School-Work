@@ -1,0 +1,8 @@
+Name : Harnoor Singh Reen
+Student ID: 110006294
+
+Added printf on line no 29 and 42 of the code.
+
+the infinite for loop calls the gettok function which stores the token in arg everytime and 
+after all the tokens are stored in the string array arg then we skip the arg case and go to the other 
+cases where the command is run

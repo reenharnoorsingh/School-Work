@@ -1,0 +1,187 @@
+Script started on 2020-10-04 09:31:27-04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ cat copy.c
+#include <unistd.h> 
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[]){ 
+ int fd1, fd2;
+ char buffer[100];  long int n1;
+
+ if(((fd1 = open(argv[1], O_RDONLY)) == -1) ||  ((fd2 = open(argv[2],  
+       O_CREAT|O_WRONLY|O_TRUNC,0700)) == -1)){
+     perror("file problem ");  
+     exit(1);
+ }
+
+ while((n1=read(fd1, buffer, 512) > 0))  
+      if(write(fd2, buffer, n1) != n1){
+             perror("writing problem ");  exit(3);
+       }
+
+// Case of an error exit from the loop  
+ if(n1 == -1){
+    perror("Reading problem ");  
+    exit(2);
+  }
+  close(fd2);  
+  exit(0);
+}
+
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ nano copy.c
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[39;49m[?1h=[?1h=[?1h=[?25l[39;49m(B[m[H[2J[22;33H(B[0;7m[ Reading File ](B[m[22;32H(B[0;7m[ Read 29 lines ](B[m[H(B[0;7m  GNU nano 3.2                         copy.c                                   [1;79H(B[m[23d(B[0;7m^G(B[m Get Help  (B[0;7m^O(B[m Write Out (B[0;7m^W(B[m Where Is  (B[0;7m^K(B[m Cut Text  (B[0;7m^J(B[m Justify   (B[0;7m^C(B[m Cur Pos[24d(B[0;7m^X(B[m Exit[14G(B[0;7m^R(B[m Read File (B[0;7m^\(B[m Replace   (B[0;7m^U(B[m Uncut Text(B[0;7m^T(B[m To Spell  (B[0;7m^_(B[m Go To Line[22d[3d(B[0;1m[36m#include[39m(B[m (B[0;1m[33m<unistd.h>(B[0m[42m [4d(B[0;1m[36m#include[39m(B[m (B[0;1m[33m<fcntl.h>[5d[36m#include[39m(B[m (B[0;1m[33m<stdlib.h>[6d[36m#include[39m(B[m (B[0;1m[33m<stdio.h>[8d(B[0m[32mint[39m(B[m main([32mint[39m(B[m argc, [32mchar[39m(B[m *argv[]){[42m [9;2H[49m[32mint[39m(B[m fd1, fd2;[10d [32mchar[39m(B[m buffer[100];  [32mlong[39m(B[m [32mint[39m(B[m n1;[12d (B[0;1m[33mif[39m(B[m(((fd1 = open(argv[1], (B[0;1m[31mO_RDONLY[39m(B[m)) == -1) ||  ((fd2 = open(argv[2],[42m  [13;8H(B[0;1m[31mO_CREAT[39m(B[m|(B[0;1m[31mO_WRONLY[39m(B[m|(B[0;1m[31mO_TRUNC[39m(B[m,0700)) == -1)){[14;6Hperror((B[0;1m[33m"file problem "[39m(B[m);[42m  [15;6H[49m(B[mexit(1);[16d }[18d(B[0;1m[33mwhile[39m(B[m((n1=read(fd1, buffer, 512) > 0))[42m  [19;7H(B[0;1m[33mif[39m(B[m(write(fd2, buffer, n1) != n1){[20;14Hperror((B[0;1m[33m"writing problem "[39m(B[m);  exit(3);[21;8H}[3d[?12l[?25h[?25l[4d[?12l[?25h[?25l[5d[?12l[?25h[?25l[6d[?12l[?25h[?25l[7d[?12l[?25h[?25l[8d[?12l[?25h[?25l[9d[?12l[?25h[?25l[10d[?12l[?25h[?25l[11d[?12l[?25h[?25l[12d[?12l[?25h[?25l[13d[?12l[?25h[?25l[14d[?12l[?25h[?25l[15d[?12l[?25h[?25l[16d[?12l[?25h[?25l[17d[?12l[?25h[?25l[18d[?12l[?25h[?25l[A[?12l[?25h[?25l[18d[?12l[?25h[?25l[A[?12l[?25h[?25l[18d[?12l[?25h[?25l [?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[22d[K[18;8H[?12l[?25h[?25l([?12l[?25h[?25ln[?12l[?25h[?25l1[?12l[?25h[?25l=[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25la[?12l[?25h[?25ld[?12l[?25h[?25l([?12l[?25h[?25lf[?12l[?25h[?25ld[?12l[?25h[?25l1[?12l[?25h[?25l,[?12l[?25h[?25l [?12l[?25h[?25lb[?12l[?25h[?25lu[?12l[?25h[?25lf[?12l[?25h[?25lf[?12l[?25h[?25le[?12l[?25h[?25lr[?12l[?25h[?25l,[?12l[?25h[?25l [?12l[?25h[?25l5[?12l[?25h[?25l1[?12l[?25h[?25l2[?12l[?25h[?25l)[?12l[?25h[?25l [?12l[?25h[?25l>[?12l[?25h[?25l [?12l[?25h[?25l0[?12l[?25h[?25l)[?12l[?25h[?25l)[?12l[?25h[?25l[C[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l2[?12l[?25h[?25l[1;71H(B[0;7mModified(B[m[18;32H[1P[?12l[?25h[?25l[1P[?12l[?25h[?25l[1P[?12l[?25h[?25l1) > 0))[42m  [18;31H[49m(B[m[?12l[?25h[?25l[A[?12l[?25h[?25l[17;22r[22;1H
+[1;24r[16;3H[?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l[K[?12l[?25h[?25l[16;22r[22;1H
+[1;24r[21;1H(B[0;1m[34m// Case of an error exit from the loop(B[0m[42m  [15;14H[49m(B[m[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m[1K [49m(B[m [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[K[?12l[?25h[?25l[15;22r[22;1H
+[1;24r[21;2H(B[0;1m[33mif[39m(B[m(n1 == -1){[14;32H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[14;13H"file problem[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m[1K [49m(B[m [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[K[?12l[?25h[?25l[14;22r[22;1H
+[1;24r[21;5Hperror((B[0;1m[33m"Reading problem "[39m(B[m);[42m  [13;48H[49m(B[m[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lO[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lO[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lO[K[?12l[?25h[?25l[42m[1K [49m(B[m [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[K[?12l[?25h[?25l[13;22r[22;1H
+[1;24r[21;5Hexit(2);[12;72H[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m  [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lO[K[?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25li[K[?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l[K[?12l[?25h[?25l[11;22r[22;1H
+[1;24r[21;3H}[11d[?12l[?25h[?25l[11;22r[22;1H
+[1;24r[21;3Hclose(fd2);[42m  [10;33H[49m(B[m[?12l[?25h[?25l7[11;21r8[11dM[1;24r[11;1H[?12l[?25h[?25l[8G[42m[1K [49m(B[m[?12l[?25h[?25l[K[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l f[?12l[?25h[?25ld[?12l[?25h[?25l1[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l =[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l o[?12l[?25h[?25lp[?12l[?25h[?25le[?12l[?25h[?25ln[?12l[?25h[?25l([?12l[?25h[?25la[?12l[?25h[?25lr[?12l[?25h[?25lg[?12l[?25h[?25lv[?12l[?25h[?25l[[?12l[?25h[?25l2[?12l[?25h[?25l [?12l[?25h[?25l1[?12l[?25h[?25l][?12l[?25h[?25l,[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l O[?12l[?25h[?25l(B[0;1m[31mO_[39m(B[m[?12l[?25h[?25l(B[0;1m[31mR[39m(B[m[?12l[?25h[?25l(B[0;1m[31mD[39m(B[m[?12l[?25h[?25l(B[0;1m[31mO[39m(B[m[?12l[?25h[?25l(B[0;1m[31mN[39m(B[m[?12l[?25h[?25l(B[0;1m[31mL[39m(B[m[?12l[?25h[?25l(B[0;1m[31mY[39m(B[m[?12l[?25h[?25l)[?12l[?25h[?25l;[?12l[?25h[?25l7[12;21r8[12dM[1;24r[12;1H[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l d[?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l f[?12l[?25h[?25ld[?12l[?25h[?25l2[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l -[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l =[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l o[?12l[?25h[?25lp[?12l[?25h[?25le[?12l[?25h[?25ln[?12l[?25h[?25l([?12l[?25h[?25la[?12l[?25h[?25lr[?12l[?25h[?25lg[?12l[?25h[?25lv[?12l[?25h[?25l[[?12l[?25h[?25l2[?12l[?25h[?25l][?12l[?25h[?25l,[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l O[?12l[?25h[?25l(B[0;1m[31mO_[39m(B[m[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l c[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25la[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[42m [49m(B[m[K[?12l[?25h[?25l[42m        [49m(B[m[?12l[?25h[?25l[12;24H         c[?12l[?25h[?25lr[?12l[?25h[?25le[?12l[?25h[?25la[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l[12;24H[42m         [49m(B[m[K[?12l[?25h[?25l[12;25H[K[?12l[?25h[?25l [?12l[?25h[?25lO[K[?12l[?25h[?25l[42m  [49m(B[m[?12l[?25h[?25l[K[?12l[?25h[?25l(B[0;1m[31mO_[39m(B[m[?12l[?25h[?25l(B[0;1m[31mC[39m(B[m[?12l[?25h[?25l(B[0;1m[31mR[39m(B[m[?12l[?25h[?25l(B[0;1m[31mE[39m(B[m[?12l[?25h[?25l(B[0;1m[31mA[39m(B[m[?12l[?25h[?25l(B[0;1m[31mT[39m(B[m[?12l[?25h[?25l|[?12l[?25h[?25lO[?12l[?25h[?25l(B[0;1m[31mO_[39m(B[m[?12l[?25h[?25l(B[0;1m[31mW[39m(B[m[?12l[?25h[?25l(B[0;1m[31mR[39m(B[m[?12l[?25h[?25l(B[0;1m[31mO[39m(B[m[?12l[?25h[?25l(B[0;1m[31mN[39m(B[m[?12l[?25h[?25l(B[0;1m[31mG[39m(B[m[?12l[?25h[?25l(B[0;1m[31mL[39m(B[m[?12l[?25h[?25l(B[0;1m[31mY[39m(B[m[?12l[?25h[?25l|[?12l[?25h[?25lO[?12l[?25h[?25l(B[0;1m[31mO_[39m(B[m[?12l[?25h[?25l(B[0;1m[31mT[39m(B[m[?12l[?25h[?25l(B[0;1m[31mR[39m(B[m[?12l[?25h[?25l(B[0;1m[31mU[39m(B[m[?12l[?25h[?25l(B[0;1m[31mN[39m(B[m[?12l[?25h[?25l(B[0;1m[31mC[39m(B[m[?12l[?25h[?25l,[?12l[?25h[?25l0[?12l[?25h[?25l7[?12l[?25h[?25l0[?12l[?25h[?25l0[?12l[?25h[?25l)[?12l[?25h[?25l;[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[?12l[?25h[?25l[1P[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l|[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l[C[?12l[?25h[?25l,[?12l[?25h[?25l0[?12l[?25h[?25l7[?12l[?25h[?25l0[?12l[?25h[?25l0[?12l[?25h[?25l)[?12l[?25h[?25l;[?12l[?25h[?25l7[13;21r8[13dM[1;24r[13;1H[?12l[?25h[?25l7[13;21r8M[1;24r[14;1H[?12l[?25h[?25l[13;22r[22;1H
+[1;24r[21;5Hperror((B[0;1m[33m"Reading problem "[39m(B[m);[42m  [13d[49m(B[m[?12l[?25h[?25l7[13;21r8M[1;24r[14;1H[?12l[?25h[?25li[?12l[?25h[?25l(B[0;1m[33mif[39m(B[m[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l [?12l[?25h[?25li[K[?12l[?25h[?25l[K[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l i[?12l[?25h[?25l(B[0;1m[33mif[39m(B[m[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l ([?12l[?25h[?25lf[?12l[?25h[?25ld[?12l[?25h[?25l1[?12l[?25h[?25l=[?12l[?25h[?25l=[?12l[?25h[?25l-[?12l[?25h[?25l1[?12l[?25h[?25l|[?12l[?25h[?25l|[?12l[?25h[?25lf[?12l[?25h[?25ld[?12l[?25h[?25l2[?12l[?25h[?25l=[?12l[?25h[?25l=[?12l[?25h[?25l-[?12l[?25h[?25l1[?12l[?25h[?25l)[?12l[?25h[?25l{[?12l[?25h[?25l7[15;21r8[15dM[1;24r[15;1H[?12l[?25h[?25l[8G[42m[1K [49m(B[m[?12l[?25h[?25l[1K p[?12l[?25h[?25le[?12l[?25h[?25lr[?12l[?25h[?25lr[?12l[?25h[?25lo[?12l[?25h[?25l [?12l[?25h[?25lo[?12l[?25h[?25lr[?12l[?25h[?25l([?12l[?25h[?25l"[?12l[?25h[?25lf[?12l[?25h[?25li[?12l[?25h[?25lk[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25l[42m [49m(B[m[?12l[?25h[?25l p[?12l[?25h[?25lr[?12l[?25h[?25li[?12l[?25h[?25lb[?12l[?25h[?25ll[?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25l [?12l[?25h[?25lo[?12l[?25h[?25ln[?12l[?25h[?25l [?12l[?25h[?25lb[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25lm[?12l[?25h[?25l[15;16H(B[0;1m[33m"file problem"[39m(B[m[?12l[?25h[?25l)[?12l[?25h[?25l;[?12l[?25h[?25l7[16;21r8[16dM[1;24r[16;1H[?12l[?25h[?25l[8G[42m[1K [49m(B[m[?12l[?25h[?25l[1K e[?12l[?25h[?25lx[?12l[?25h[?25li[?12l[?25h[?25lt[?12l[?25h[?25l([?12l[?25h[?25l1[?12l[?25h[?25l)[?12l[?25h[?25l;[?12l[?25h[?25l7[17;22r8[17dM[1;24r[17;1H[?12l[?25h[?25l}[?12l[?25h[?25l[20d[?12l[?25h[?25l[2;22r[22;1H[10S[1;24r[2;1H[K[13d(B[0;1m[34m// Case of an error exit from the loop(B[0m[42m  [14;2H(B[0;1m[33mif[39m(B[m(n1 == -1){[15;5Hperror((B[0;1m[33m"Reading problem "[39m(B[m);[42m  [16;5H[49m(B[mexit(2);[17;3H}[18dclose(fd2);[42m  [19;3H[49m(B[mexit(0);[20d}[13d[?12l[?25h[?25l[16d[?12l[?25h[?25l[19d[?12l[?25h[?25l[2;22r[22;1H[10S[1;24r[12;1H[?12l[?25h[?25l[9d [?12l[?25h[?25l[6d[?12l[?25h[?25l[1;79H[1;71H(B[0;7m        (B[m[22;32H(B[0;7m[ Wrote 29 lines ](B[m[6d [?12l[?25h[?25l[3d[?12l[?25h[?25l[2;21r[2;1H[10T[1;24r[4;2H(B[0;1m[33mif[39m(B[m (fd1==-1||fd2==-1){[5;9Hperror((B[0;1m[33m"file problem"[39m(B[m);[6;9Hexit(1);[7d}[8d(B[0;1m[33mwhile[39m(B[m((n1=read(fd1, buffer, 1) > 0))[42m  [9;7H(B[0;1m[33mif[39m(B[m(write(fd2, buffer, n1) != n1){[10;14Hperror((B[0;1m[33m"writing problem "[39m(B[m);  exit(3);[11;8H}[A [?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[A[?12l[?25h[?25l[1;71H(B[0;7mModified(B[m[8;21r[8;1HM[1;24r[8;1H[?12l[?25h[?25l[1;79H[1;71H(B[0;7m        (B[m[22;40H(B[0;7m30[22;50H(B[m[8d[?12l[?25h[?25l[22d[J[24;80H[?12l[?25h[24;1H[?1049l[23;0;0t[?1l>]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ cat copy.c
+#include <unistd.h> 
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[]){ 
+ int fd1, fd2;
+ char buffer[100];  long int n1;
+ fd1 = open(argv[1], O_RDONLY);
+ fd2 = open(argv[2], O_CREAT|O_WRONLY|O_TRUNC,0700);
+
+ if (fd1==-1||fd2==-1){
+	perror("file problem");
+	exit(1);
+}
+
+ while((n1=read(fd1, buffer, 1) > 0))  
+      if(write(fd2, buffer, n1) != n1){
+             perror("writing problem ");  exit(3);
+       }
+
+// Case of an error exit from the loop  
+ if(n1 == -1){
+    perror("Reading problem ");  
+    exit(2);
+  }
+  close(fd2);  
+  exit(0);
+}
+
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ gcc -g copy.c -o copy
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ ./copy copy.c copy.bak
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ cat copy.bak
+#include <unistd.h> 
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+int main(int argc, char *argv[]){ 
+ int fd1, fd2;
+ char buffer[100];  long int n1;
+ fd1 = open(argv[1], O_RDONLY);
+ fd2 = open(argv[2], O_CREAT|O_WRONLY|O_TRUNC,0700);
+
+ if (fd1==-1||fd2==-1){
+	perror("file problem");
+	exit(1);
+}
+
+ while((n1=read(fd1, buffer, 1) > 0))  
+      if(write(fd2, buffer, n1) != n1){
+             perror("writing problem ");  exit(3);
+       }
+
+// Case of an error exit from the loop  
+ if(n1 == -1){
+    perror("Reading problem ");  
+    exit(2);
+  }
+  close(fd2);  
+  exit(0);
+}
+
+]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ gdb -yu[K[Ktui cop[K[K[K./copy
+[?1049h[22;0;0t[1;24r(B[m[4l[?7h[?1h=[H[2J[16d(B[0;7mNone No process In:                                                L??   PC: ?? [17;1H(B[m[H   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B[2;4H(0[0mx(B[80G(0[0mx(B[3;4H(0[0mx(B[80G(0[0mx(B[4;4H(0[0mx(B[80G(0[0mx(B[5;4H(0[0mx(B[80G(0[0mx(B[6;4H(0[0mx(B[80G(0[0mx(B[7;4H(0[0mx(B[80G(0[0mx(B[8;4H(0[0mx(B[80G(0[0mx(B[9;4H(0[0mx(B[80G(0[0mx(B[10;4H(0[0mx(B[80G(0[0mx(B[11;4H(0[0mx(B[80G(0[0mx(B[12;4H(0[0mx(B[80G(0[0mx(B[13;4H(0[0mx(B[80G(0[0mx(B[14;4H(0[0mx(B[80G(0[0mx(B[15;4H(0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B[1;4H(0[0m(B[8;18H[ No Source Available ][8;18H[23X[H   [8;18H[ No Source Available ][H[8;41H[?1h=[17d[H[2J   (0[0mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B[2;4H(0[0mx(B[80G(0[0mx(B[3;4H(0[0mx(B[80G(0[0mx(B[4;4H(0[0mx(B[80G(0[0mx(B[5;4H(0[0mx(B[80G(0[0mx(B[6;4H(0[0mx(B[80G(0[0mx(B[7;4H(0[0mx(B[80G(0[0mx(B[8;4H(0[0mx(B[8;18H(0[0m(B[ No Source Available ][80G(0[0mx(B[9;4H(0[0mx(B[80G(0[0mx(B[10;4H(0[0mx(B[80G(0[0mx(B[11;4H(0[0mx(B[80G(0[0mx(B[12;4H(0[0mx(B[80G(0[0mx(B[13;4H(0[0mx(B[80G(0[0mx(B[14;4H(0[0mx(B[80G(0[0mx(B[15;4H(0[0mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B[16;1H(0[0m(B[0;7mNone No process In:                                                L??   PC: ?? [1;1H(B[m[8;41H[16d[H   (0[0;1;7mlqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqk(B(B[m[2;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[3;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[4;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[5;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[6;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[7;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[8;4H(0[0;1;7mx(B(B[m[8;18H(0[0;1;7m(B(B[m[23X[80G(0[0;1;7mx(B(B[m[9;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[10;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[11;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[12;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[13;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[14;4H(0[0;1;7mx(B(B[m[80G(0[0;1;7mx(B(B[m[15;4H(0[0;1;7mmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqj(B(B[m[1;4H(0[0;1;7m(B(B[m[8;18H[ No Source Available ][H[17dGNU gdb (Debian 8.2.1-2+b3) 8.2.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+--Type <RET> for more, q to quit, c to continue without paging--[17dType "show configuration" for configuration details.
+For bug reporting instructions, please see:[K
+<http://www.gnu.org/software/gdb/bugs/>.[K
+Find the GDB manual and other documentation resources online at:[K
+    <http://www.gnu.org/software/gdb/documentation/>
+[K
+For help, type "help".[K[24;65H[17d[2M[23dType "apropos word" to search for commands related to "word"...
+Reading symbols from ./copy...[17d[M[23;31Hdone.
+[1;7H(B[0;1;7mcopy.c
+[5G(B[m6[13Gint main(int argc, char *argv[]){
+[5G7[3;14Hint fd1, fd2;
+[5G8[4;14Hchar buffer[100];  long int n1;
+[5G9[5;14Hfd1 = open(argv[1], O_RDONLY);
+[5G10[14Gfd2 = open(argv[2], O_CREAT|O_WRONLY|O_TRUNC,0700);
+[5G11
+12[14Gif (fd1==-1||fd2==-1){     
+[5G13[9;21Hperror("file problem");
+[5G14[10;21Hexit(1);
+[5G15[13G}
+[5G16
+17[14Gwhile((n1=read(fd1, buffer, 1) > 0))
+[5G18[14;19Hif(write(fd2, buffer, n1) != n1){[1;13H[15d
+(B[0;7mexec
+(B[m[1;13H[15d
+
+[24d(gdb) b 17[H[13db+
+
+
+
+[2M[23dBreakpoint 1 at 0x123b: file copy.c, line 17.
+(gdb) r copy.c copy.bak[17d[3M[22dStarting program: /home/reen/Desktop/Systems Programming/Lab 2/copy copy.c copy.[23;1Hbak
+[1;13H[13d  [H[13db+
+
+
+(B[0;7mnative process 12555 In:
+(B[m[24d[1;13H[13d  [H[13db+
+
+
+
+[24d[1;13H[13d  [H[13db+
+
+
+
+[24d[13d  [H[13dB+
+
+
+
+[2M[23dBreakpoint 1, main (argc=3, argv=0x7fffffffd948) at copy.c:17
+[16;26H(B[0;7mmain[16;56HL17   PC: 0x55555555523b
+(B[m[2;14r[14;1H[6S[1;24r[7;1H   (0[0;1;7mx(B[0;7m17       while((n1=read(fd1, buffer, 1) > 0))  
+
+[4G(0[0;1;7mx(B(B[m19[9;26Hperror("writing problem ");  exit(3);[80G(0[0;1;7mx(B(B[m[10;4H(0[0;1;7mx(B(B[m20[10;20H}[80G(0[0;1;7mx(B(B[m[11;4H(0[0;1;7mx(B(B[m21[80G(0[0;1;7mx(B(B[m[12;4H(0[0;1;7mx(B(B[m22[13G// Case of an error exit from the loop[80G(0[0;1;7mx(B(B[m[13;1H(0[0;1;7m(B(B[mB+ (0[0;1;7mx(B(B[m23[14Gif(n1 == -1){[80G(0[0;1;7mx(B(B[m[14;4H(0[0;1;7mx(B(B[m24[14;17Hperror("Reading problem ");[80G(0[0;1;7mx(B(B[m[1;13H(0[0;1;7m(B(B[m[13d  [H[7dB+>[15d[7d   [H[7dB+>[15d[24d(gdb) print fd1[17d[M[24d$1 = 3[17d[M[24d(gdb) print fd2[17d[M[24d$2 = 4[17d[M[24d(gdb) print n1[17d[M[24d$3 = 140737488345408[17d[M[24d(gdb) n[17d[M[24d[16;58H(B[0;7m8[78G0a
+(B[m[7;5H17       while((n1=read(fd1, buffer, 1) > 0))  
+[5G(B[0;7m18            if(write(fd2, buffer, n1) != n1){[80G(B[m[A   [H[7dB+
+>[15d[24d(gdb) prit nt fd1[17d[M[24d$4 = 3[17d[M[24d(gdb) print fd2[17d[M[24d$5 = 4[17d[M[24d(gdb) print n1[17d[M[24d$6 = 1[17d[M[24d(gdb) n[17d[M[24d[17d[2M[23dBreakpoint 1, main (argc=3, argv=0x7fffffffd948) at copy.c:17
+[16;58H(B[0;7m7[78G3b
+(B[m[7;5H(B[0;7m17       while((n1=read(fd1, buffer, 1) > 0))  
+[5G(B[m18            if(write(fd2, buffer, n1) != n1){[80G[A  
+ [H[7dB+>[15d[24d(gdb) e delete 16[17d[2M[23dNo breakpoint number 16.
+(gdb) n[17d[M[24d[16;58H(B[0;7m8[78G0a
+(B[m[7;5H17       while((n1=read(fd1, buffer, 1) > 0))  
+[5G(B[0;7m18            if(write(fd2, buffer, n1) != n1){[80G(B[m[A   [H[7dB+
+>[15d[24d(gdb) n[17d[M[24d[17d[2M[23dBreakpoint 1, main (argc=3, argv=0x7fffffffd948) at copy.c:17
+[16;58H(B[0;7m7[78G3b
+(B[m[7;5H(B[0;7m17       while((n1=read(fd1, buffer, 1) > 0))  
+[5G(B[m18            if(write(fd2, buffer, n1) != n1){[80G[A  
+ [H[7dB+>[15d[24d(gdb) q[17d[M[24d[17d[4M
+
+
+A debugging session is active.[22;9HInferior 1 [process 12555] will be killed.
+
+Quit anyway? (y or n) y[24;1H[?1049l[23;0;0t[?1l>]0;reen@bravo: ~/Desktop/Systems Programming/Lab 2[01;32mreen@bravo[00m:[01;34m~/Desktop/Systems Programming/Lab 2[00m$ exit
+exit
+
+Script done on 2020-10-04 09:42:14-04:00 [COMMAND_EXIT_CODE="0"]
