@@ -1,2 +1,2 @@
 # School-Work
-   Assingments/Labs
+Assingments/Labs throughout my time at the University of Windsor
